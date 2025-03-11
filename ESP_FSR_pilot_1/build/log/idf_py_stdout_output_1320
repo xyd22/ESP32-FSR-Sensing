@@ -1,0 +1,98 @@
+[1/10] Performing build step for 'bootloader'
+[1/1] cmd.exe /C "cd /D D:\2025-Spring-Cornell-Research\Hardware_Projects\ESP_FSR_pilot_1\build\bootloader\esp-idf\esptool_py && C:\Espressif\python_env\idf5.0_py3.11_env\Scripts\python.exe C:/Espressif/frameworks/esp-idf-v5.0.3/components/partition_table/check_sizes.py --offset 0x8000 bootloader 0x1000 D:/2025-Spring-Cornell-Research/Hardware_Projects/ESP_FSR_pilot_1/build/bootloader/bootloader.bin"
+Bootloader binary size 0x6760 bytes. 0x8a0 bytes (8%) free.
+[2/8] Building C object esp-idf/main/CMakeFiles/__idf_main.dir/ESP_FSR_pilot_1.c.obj
+In file included from D:/2025-Spring-Cornell-Research/Hardware_Projects/ESP_FSR_pilot_1/main/ESP_FSR_pilot_1.c:6:
+C:/Espressif/frameworks/esp-idf-v5.0.3/components/driver/deprecated/driver/adc.h:19:2: warning: #warning "legacy adc driver is deprecated, please migrate to use esp_adc/adc_oneshot.h and esp_adc/adc_continuous.h for oneshot mode and continuous mode drivers respectively" [-Wcpp]
+   19 | #warning "legacy adc driver is deprecated, please migrate to use esp_adc/adc_oneshot.h and esp_adc/adc_continuous.h for oneshot mode and continuous mode drivers respectively"
+      |  ^~~~~~~
+D:/2025-Spring-Cornell-Research/Hardware_Projects/ESP_FSR_pilot_1/main/ESP_FSR_pilot_1.c: In function 'send_sensor_data':
+D:/2025-Spring-Cornell-Research/Hardware_Projects/ESP_FSR_pilot_1/main/ESP_FSR_pilot_1.c:149:34: warning: passing argument 1 of 'float_array_to_bytes' from incompatible pointer type [-Wincompatible-pointer-types]
+  149 |             float_array_to_bytes(&v_out, &data_bytes + i * NUM_ADC_CHANNELS * sizeof(float), NUM_ADC_CHANNELS);
+      |                                  ^~~~~~
+      |                                  |
+      |                                  float (*)[5]
+D:/2025-Spring-Cornell-Research/Hardware_Projects/ESP_FSR_pilot_1/main/ESP_FSR_pilot_1.c:88:34: note: expected 'float *' but argument is of type 'float (*)[5]'
+   88 | void float_array_to_bytes(float *float_array, uint8_t *byte_array, size_t float_count) {
+      |                           ~~~~~~~^~~~~~~~~~~
+D:/2025-Spring-Cornell-Research/Hardware_Projects/ESP_FSR_pilot_1/main/ESP_FSR_pilot_1.c:149:54: warning: passing argument 2 of 'float_array_to_bytes' from incompatible pointer type [-Wincompatible-pointer-types]
+  149 |             float_array_to_bytes(&v_out, &data_bytes + i * NUM_ADC_CHANNELS * sizeof(float), NUM_ADC_CHANNELS);
+      |                                          ~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      |                                                      |
+      |                                                      uint8_t (*)[1280] {aka unsigned char (*)[1280]}
+D:/2025-Spring-Cornell-Research/Hardware_Projects/ESP_FSR_pilot_1/main/ESP_FSR_pilot_1.c:88:56: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'uint8_t (*)[1280]' {aka 'unsigned char (*)[1280]'}
+   88 | void float_array_to_bytes(float *float_array, uint8_t *byte_array, size_t float_count) {
+      |                                               ~~~~~~~~~^~~~~~~~~~
+[3/8] Linking C static library esp-idf\main\libmain.a
+[4/8] Generating ld/sections.ld
+[5/8] Linking CXX executable ESP_FSR_pilot_1.elf
+[6/8] Generating binary image from built executable
+esptool.py v4.5.1
+Creating esp32 image...
+Merged 25 ELF sections
+Successfully created esp32 image.
+Generated D:/2025-Spring-Cornell-Research/Hardware_Projects/ESP_FSR_pilot_1/build/ESP_FSR_pilot_1.bin
+[7/8] cmd.exe /C "cd /D D:\2025-Spring-Cornell-Research\Hardware_Projects\ESP_FSR_pilot_1\build\esp-idf\esptool_py && C:\Espressif\python_env\idf5.0_py3.11_env\Scripts\python.exe C:/Espressif/frameworks/esp-idf-v5.0.3/components/partition_table/check_sizes.py --offset 0x8000 partition --type app D:/2025-Spring-Cornell-Research/Hardware_Projects/ESP_FSR_pilot_1/build/partition_table/partition-table.bin D:/2025-Spring-Cornell-Research/Hardware_Projects/ESP_FSR_pilot_1/build/ESP_FSR_pilot_1.bin"
+ESP_FSR_pilot_1.bin binary size 0xb26a0 bytes. Smallest app partition is 0x100000 bytes. 0x4d960 bytes (30%) free.
+[7/8] cmd.exe /C "cd /D C:\Espressif\frameworks\esp-idf-v5.0.3\components\esptool_py && C:\Espressif\tools\cmake\3.24.0\bin\cmake.exe -D IDF_PATH=C:/Espressif/frameworks/esp-idf-v5.0.3 -D SERIAL_TOOL=C:/Espressif/python_env/idf5.0_py3.11_env/Scripts/python.exe;;C:/Espressif/frameworks/esp-idf-v5.0.3/components/esptool_py/esptool/esptool.py;--chip;esp32 -D SERIAL_TOOL_ARGS=--before=default_reset;--after=hard_reset;write_flash;@flash_args -D WORKING_DIRECTORY=D:/2025-Spring-Cornell-Research/Hardware_Projects/ESP_FSR_pilot_1/build -P C:/Espressif/frameworks/esp-idf-v5.0.3/components/esptool_py/run_serial_tool.cmake"
+esptool esp32 -p COM20 -b 460800 --before=default_reset --after=hard_reset write_flash --flash_mode dio --flash_freq 40m --flash_size 2MB 0x1000 bootloader/bootloader.bin 0x10000 ESP_FSR_pilot_1.bin 0x8000 partition_table/partition-table.bin
+esptool.py v4.5.1
+Serial port COM20
+Connecting.......
+Chip is ESP32-D0WDQ6 (revision v1.0)
+Features: WiFi, BT, Dual Core, 240MHz, VRef calibration in efuse, Coding Scheme None
+Crystal is 40MHz
+MAC: 3c:71:bf:14:e6:c4
+Uploading stub...
+Running stub...
+Stub running...
+Changing baud rate to 460800
+Changed.
+Configuring flash size...
+Flash will be erased from 0x00001000 to 0x00007fff...
+Flash will be erased from 0x00010000 to 0x000c2fff...
+Flash will be erased from 0x00008000 to 0x00008fff...
+Compressed 26464 bytes to 16487...
+Writing at 0x00001000... (50 %)
+Writing at 0x000076d3... (100 %)
+Wrote 26464 bytes (16487 compressed) at 0x00001000 in 0.8 seconds (effective 260.9 kbit/s)...
+Hash of data verified.
+Compressed 730784 bytes to 471660...
+Writing at 0x00010000... (3 %)
+Writing at 0x0001c321... (6 %)
+Writing at 0x000241bb... (10 %)
+Writing at 0x000294da... (13 %)
+Writing at 0x00032056... (17 %)
+Writing at 0x000378bd... (20 %)
+Writing at 0x0003d467... (24 %)
+Writing at 0x0004287b... (27 %)
+Writing at 0x000481df... (31 %)
+Writing at 0x0004d9c2... (34 %)
+Writing at 0x0005329d... (37 %)
+Writing at 0x00059259... (41 %)
+Writing at 0x0005e8c6... (44 %)
+Writing at 0x00063af4... (48 %)
+Writing at 0x00068ee2... (51 %)
+Writing at 0x0006e2df... (55 %)
+Writing at 0x00073843... (58 %)
+Writing at 0x00079062... (62 %)
+Writing at 0x0007ec93... (65 %)
+Writing at 0x00084370... (68 %)
+Writing at 0x00089f0f... (72 %)
+Writing at 0x0008fd43... (75 %)
+Writing at 0x0009567f... (79 %)
+Writing at 0x0009bbce... (82 %)
+Writing at 0x000a6172... (86 %)
+Writing at 0x000ad040... (89 %)
+Writing at 0x000b302e... (93 %)
+Writing at 0x000b89da... (96 %)
+Writing at 0x000be0b3... (100 %)
+Wrote 730784 bytes (471660 compressed) at 0x00010000 in 11.2 seconds (effective 520.6 kbit/s)...
+Hash of data verified.
+Compressed 3072 bytes to 103...
+Writing at 0x00008000... (100 %)
+Wrote 3072 bytes (103 compressed) at 0x00008000 in 0.1 seconds (effective 377.5 kbit/s)...
+Hash of data verified.
+
+Leaving...
+Hard resetting via RTS pin...

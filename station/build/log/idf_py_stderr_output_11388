@@ -1,0 +1,69 @@
+[0;33m--- WARNING: GDB cannot open serial ports accessed as COMx[0m
+[0;33m--- Using \\.\COM20 instead...[0m
+[0;33m--- idf_monitor on \\.\COM20 115200 ---[0m
+[0;33m--- Quit: Ctrl+] | Menu: Ctrl+T | Help: Ctrl+T followed by Ctrl+H ---[0m
+[0;33m0x40080400: _init at ??:?
+[0m
+[0;33m0x400812bc: call_start_cpu1 at C:/Espressif/frameworks/esp-idf-v5.0.3/components/esp_system/port/cpu_start.c:143
+[0m
+[0;33m0x40087852: tx_pwctrl_background at /home/cff/gittree/chip7.1_phy/chip_7.1/board_code/app_test/pp/phy/phy_chip_v7_cal.c:2666
+[0m
+[0;33m0x4008784f: tx_pwctrl_background at /home/cff/gittree/chip7.1_phy/chip_7.1/board_code/app_test/pp/phy/phy_chip_v7_cal.c:2666
+[0m
+[0;33m0x40116311: lmacProcessTxComplete at ??:?
+[0m
+[0;33m0x40090f86: ppTask at ??:?
+[0m
+[0;33m0x4008bde9: vPortTaskWrapper at C:/Espressif/frameworks/esp-idf-v5.0.3/components/freertos/FreeRTOS-Kernel/portable/xtensa/port.c:154
+[0m
+[0;33m0x40080400: _init at ??:?
+[0m
+[0;33m0x400812bc: call_start_cpu1 at C:/Espressif/frameworks/esp-idf-v5.0.3/components/esp_system/port/cpu_start.c:143
+[0m
+[0;33m0x4008d608: tlsf_fls at C:/Espressif/frameworks/esp-idf-v5.0.3/components/heap/tlsf/tlsf.c:75
+ (inlined by) mapping_insert at C:/Espressif/frameworks/esp-idf-v5.0.3/components/heap/tlsf/tlsf.c:274
+ (inlined by) block_insert at C:/Espressif/frameworks/esp-idf-v5.0.3/components/heap/tlsf/tlsf.c:387
+ (inlined by) tlsf_free at C:/Espressif/frameworks/esp-idf-v5.0.3/components/heap/tlsf/tlsf.c:1123
+[0m
+[0;33m0x4008d60f: mapping_insert at C:/Espressif/frameworks/esp-idf-v5.0.3/components/heap/tlsf/tlsf.c:275
+ (inlined by) block_insert at C:/Espressif/frameworks/esp-idf-v5.0.3/components/heap/tlsf/tlsf.c:387
+ (inlined by) tlsf_free at C:/Espressif/frameworks/esp-idf-v5.0.3/components/heap/tlsf/tlsf.c:1123
+[0m
+[0;33m0x4008d60c: tlsf_fls at C:/Espressif/frameworks/esp-idf-v5.0.3/components/heap/tlsf/tlsf.c:76
+ (inlined by) mapping_insert at C:/Espressif/frameworks/esp-idf-v5.0.3/components/heap/tlsf/tlsf.c:274
+ (inlined by) block_insert at C:/Espressif/frameworks/esp-idf-v5.0.3/components/heap/tlsf/tlsf.c:387
+ (inlined by) tlsf_free at C:/Espressif/frameworks/esp-idf-v5.0.3/components/heap/tlsf/tlsf.c:1123
+[0m
+[0;33m0x4008d1b0: multi_heap_free_impl at C:/Espressif/frameworks/esp-idf-v5.0.3/components/heap/multi_heap.c:231
+[0m
+[0;33m0x400822b2: heap_caps_free at C:/Espressif/frameworks/esp-idf-v5.0.3/components/heap/heap_caps.c:374
+[0m
+[0;33m0x4008f6c1: free at C:/Espressif/frameworks/esp-idf-v5.0.3/components/newlib/heap.c:39
+[0m
+[0;33m0x400de250: mem_free at C:/Espressif/frameworks/esp-idf-v5.0.3/components/lwip/lwip/src/core/mem.c:236 (discriminator 2)
+[0m
+[0;33m0x400df1ba: pbuf_free at C:/Espressif/frameworks/esp-idf-v5.0.3/components/lwip/lwip/src/core/pbuf.c:780
+[0m
+[0;33m0x400e7896: etharp_raw at C:/Espressif/frameworks/esp-idf-v5.0.3/components/lwip/lwip/src/core/ipv4/etharp.c:1177 (discriminator 2)
+[0m
+[0;33m0x400e78c1: etharp_request_dst at C:/Espressif/frameworks/esp-idf-v5.0.3/components/lwip/lwip/src/core/ipv4/etharp.c:1199
+[0m
+[0;33m0x400e79f8: etharp_request at C:/Espressif/frameworks/esp-idf-v5.0.3/components/lwip/lwip/src/core/ipv4/etharp.c:1217
+[0m
+[0;33m0x400e7a8d: etharp_tmr at C:/Espressif/frameworks/esp-idf-v5.0.3/components/lwip/lwip/src/core/ipv4/etharp.c:228
+[0m
+[0;33m0x400e4d61: lwip_cyclic_timer at C:/Espressif/frameworks/esp-idf-v5.0.3/components/lwip/lwip/src/core/timeouts.c:243
+[0m
+[0;33m0x400e4ead: sys_check_timeouts at C:/Espressif/frameworks/esp-idf-v5.0.3/components/lwip/lwip/src/core/timeouts.c:401
+[0m
+[0;33m0x400ddef6: tcpip_timeouts_mbox_fetch at C:/Espressif/frameworks/esp-idf-v5.0.3/components/lwip/lwip/src/api/tcpip.c:109
+[0m
+[0;33m0x400ddfae: tcpip_thread at C:/Espressif/frameworks/esp-idf-v5.0.3/components/lwip/lwip/src/api/tcpip.c:142
+[0m
+[0;33m0x4008bde9: vPortTaskWrapper at C:/Espressif/frameworks/esp-idf-v5.0.3/components/freertos/FreeRTOS-Kernel/portable/xtensa/port.c:154
+[0m
+[0;33m0x40080400: _init at ??:?
+[0m
+[0;33m0x400812bc: call_start_cpu1 at C:/Espressif/frameworks/esp-idf-v5.0.3/components/esp_system/port/cpu_start.c:143
+[0m
+[0m

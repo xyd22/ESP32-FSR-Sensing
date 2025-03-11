@@ -1,0 +1,106 @@
+ets Jun  8 2016 00:22:57
+
+rst:0x1 (POWERON_RESET),boot:0x13 (SPI_FAST_FLASH_BOOT)
+configsip: 0, SPIWP:0xee
+clk_drv:0x00,q_drv:0x00,d_drv:0x00,cs0_drv:0x00,hd_drv:0x00,wp_drv:0x00
+mode:DIO, clock div:2
+load:0x3fff0030,len:6992
+load:0x40078000,len:15512
+load:0x40080400,len:3864
+entry 0x40080650
+[0;32mI (27) boot: ESP-IDF v5.0.3-dirty 2nd stage bootloader[0m
+[0;32mI (27) boot: compile time 11:28:48[0m
+[0;32mI (27) boot: Multicore bootloader[0m
+[0;32mI (30) boot: chip revision: v1.0[0m
+[0;32mI (34) boot.esp32: SPI Speed      : 40MHz[0m
+[0;32mI (39) boot.esp32: SPI Mode       : DIO[0m
+[0;32mI (43) boot.esp32: SPI Flash Size : 2MB[0m
+[0;32mI (48) boot: Enabling RNG early entropy source...[0m
+[0;32mI (53) boot: Partition Table:[0m
+[0;32mI (57) boot: ## Label            Usage          Type ST Offset   Length[0m
+[0;32mI (64) boot:  0 nvs              WiFi data        01 02 00009000 00006000[0m
+[0;32mI (72) boot:  1 phy_init         RF data          01 01 0000f000 00001000[0m
+[0;32mI (79) boot:  2 factory          factory app      00 00 00010000 00100000[0m
+[0;32mI (87) boot: End of partition table[0m
+[0;32mI (91) esp_image: segment 0: paddr=00010020 vaddr=3f400020 size=1e918h (125208) map[0m
+[0;32mI (145) esp_image: segment 1: paddr=0002e940 vaddr=3ffb0000 size=016d8h (  5848) load[0m
+[0;32mI (147) esp_image: segment 2: paddr=00030020 vaddr=400d0020 size=7ac50h (502864) map[0m
+[0;32mI (332) esp_image: segment 3: paddr=000aac78 vaddr=3ffb16d8 size=01c64h (  7268) load[0m
+[0;32mI (335) esp_image: segment 4: paddr=000ac8e4 vaddr=40080000 size=14e34h ( 85556) load[0m
+[0;32mI (383) boot: Loaded app from partition at offset 0x10000[0m
+[0;32mI (383) boot: Disabling RNG early entropy source...[0m
+[0;32mI (395) cpu_start: Multicore app[0m
+[0;32mI (395) cpu_start: Pro cpu up.[0m
+[0;32mI (395) cpu_start: Starting app cpu, entry point is 0x400812bc[0m
+[0;32mI (0) cpu_start: App cpu up.[0m
+[0;32mI (413) cpu_start: Pro cpu start user code[0m
+[0;32mI (413) cpu_start: cpu freq: 160000000 Hz[0m
+[0;32mI (413) cpu_start: Application information:[0m
+[0;32mI (418) cpu_start: Project name:     wifi_station[0m
+[0;32mI (423) cpu_start: App version:      1[0m
+[0;32mI (428) cpu_start: Compile time:     Mar 11 2025 11:28:08[0m
+[0;32mI (434) cpu_start: ELF file SHA256:  8c44e13d280fe995...[0m
+[0;32mI (440) cpu_start: ESP-IDF:          v5.0.3-dirty[0m
+[0;32mI (445) cpu_start: Min chip rev:     v0.0[0m
+[0;32mI (450) cpu_start: Max chip rev:     v3.99 [0m
+[0;32mI (455) cpu_start: Chip rev:         v1.0[0m
+[0;32mI (460) heap_init: Initializing. RAM available for dynamic allocation:[0m
+[0;32mI (467) heap_init: At 3FFAE6E0 len 00001920 (6 KiB): DRAM[0m
+[0;32mI (473) heap_init: At 3FFB6FF0 len 00029010 (164 KiB): DRAM[0m
+[0;32mI (479) heap_init: At 3FFE0440 len 00003AE0 (14 KiB): D/IRAM[0m
+[0;32mI (485) heap_init: At 3FFE4350 len 0001BCB0 (111 KiB): D/IRAM[0m
+[0;32mI (492) heap_init: At 40094E34 len 0000B1CC (44 KiB): IRAM[0m
+[0;32mI (499) spi_flash: detected chip: generic[0m
+[0;32mI (503) spi_flash: flash io: dio[0m
+[0;33mW (507) spi_flash: Detected size(4096k) larger than the size in the binary image header(2048k). Using the size in the binary image header.[0m
+[0;32mI (521) cpu_start: Starting scheduler on PRO CPU.[0m
+[0;32mI (0) cpu_start: Starting scheduler on APP CPU.[0m
+[0;32mI (608) wifi station: ESP_WIFI_MODE_STA[0m
+I (618) wifi:wifi driver task: 3ffbf0bc, prio:23, stack:6656, core=0
+[0;32mI (618) system_api: Base MAC address is not set[0m
+[0;32mI (618) system_api: read default base MAC address from EFUSE[0m
+I (648) wifi:wifi firmware version: 15fc0ca
+I (648) wifi:wifi certification version: v7.0
+I (648) wifi:config NVS flash: enabled
+I (648) wifi:config nano formating: disabled
+I (648) wifi:Init data frame dynamic rx buffer num: 32
+I (658) wifi:Init management frame dynamic rx buffer num: 32
+I (658) wifi:Init management short buffer num: 32
+I (658) wifi:Init dynamic tx buffer num: 32
+I (668) wifi:Init static rx buffer size: 1600
+I (668) wifi:Init static rx buffer num: 10
+I (678) wifi:Init dynamic rx buffer num: 32
+[0;32mI (678) wifi_init: rx ba win: 6[0m
+[0;32mI (678) wifi_init: tcpip mbox: 32[0m
+[0;32mI (688) wifi_init: udp mbox: 6[0m
+[0;32mI (688) wifi_init: tcp mbox: 6[0m
+[0;32mI (698) wifi_init: tcp tx win: 5744[0m
+[0;32mI (698) wifi_init: tcp rx win: 5744[0m
+[0;32mI (698) wifi_init: tcp mss: 1440[0m
+[0;32mI (708) wifi_init: WiFi IRAM OP enabled[0m
+[0;32mI (708) wifi_init: WiFi RX IRAM OP enabled[0m
+[0;32mI (728) phy_init: phy_version 4670,719f9f6,Feb 18 2021,17:07:07[0m
+I (828) wifi:mode : sta (3c:71:bf:14:e6:c4)
+I (828) wifi:enable tsf
+[0;32mI (828) wifi station: wifi_init_sta finished.[0m
+I (848) wifi:new:<9,0>, old:<1,0>, ap:<255,255>, sta:<9,0>, prof:1
+I (1538) wifi:state: init -> auth (b0)
+I (1548) wifi:state: auth -> assoc (0)
+I (1558) wifi:state: assoc -> run (10)
+I (1578) wifi:connected with TP-Link_AA24, aid = 2, channel 9, BW20, bssid = 54:af:97:10:e0:5b
+I (1578) wifi:security: WPA2-PSK, phy: bgn, rssi: -41
+I (1598) wifi:pm start, type: 1
+
+I (1608) wifi:<ba-add>idx:0 (ifx:0, 54:af:97:10:e0:5b), tid:7, ssn:0, winSize:64
+I (1648) wifi:AP's beacon interval = 102400 us, DTIM period = 1
+[0;32mI (2598) esp_netif_handlers: sta ip: 192.168.0.158, mask: 255.255.255.0, gw: 192.168.0.1[0m
+[0;32mI (2598) wifi station: got ip:192.168.0.158[0m
+[0;32mI (2598) wifi station: connected to ap SSID:TP-Link_AA24 password:lab237237[0m
+[0;32mI (2608) wifi station: Socket created, connecting to 192.168.0.114:1234[0m
+I (2628) wifi:<ba-add>idx:1 (ifx:0, 54:af:97:10:e0:5b), tid:0, ssn:0, winSize:64
+[0;32mI (2628) wifi station: Successfully connected[0m
+[0;33mW (2638) wifi station: Connection closed[0m
+[0;32mI (2648) wifi station: Shutting down socket and retrying...[0m
+[0;32mI (3648) wifi station: Socket created, connecting to 192.168.0.114:1234[0m
+[0;31mE (22148) wifi station: Socket unable to connect: errno 113[0m
+[0;32mI (23148) wifi station: Socket created, connecting to 192.168.0.114:1234[0m

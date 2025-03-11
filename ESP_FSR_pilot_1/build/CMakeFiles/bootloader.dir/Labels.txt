@@ -1,0 +1,13 @@
+# Target labels
+ bootloader
+# Source files and their labels
+D:/2025-Spring-Cornell-Research/Hardware_Projects/ESP_FSR_pilot_1/build/CMakeFiles/bootloader
+D:/2025-Spring-Cornell-Research/Hardware_Projects/ESP_FSR_pilot_1/build/CMakeFiles/bootloader.rule
+D:/2025-Spring-Cornell-Research/Hardware_Projects/ESP_FSR_pilot_1/build/CMakeFiles/bootloader-complete.rule
+D:/2025-Spring-Cornell-Research/Hardware_Projects/ESP_FSR_pilot_1/build/bootloader-prefix/src/bootloader-stamp/bootloader-build.rule
+D:/2025-Spring-Cornell-Research/Hardware_Projects/ESP_FSR_pilot_1/build/bootloader-prefix/src/bootloader-stamp/bootloader-configure.rule
+D:/2025-Spring-Cornell-Research/Hardware_Projects/ESP_FSR_pilot_1/build/bootloader-prefix/src/bootloader-stamp/bootloader-download.rule
+D:/2025-Spring-Cornell-Research/Hardware_Projects/ESP_FSR_pilot_1/build/bootloader-prefix/src/bootloader-stamp/bootloader-install.rule
+D:/2025-Spring-Cornell-Research/Hardware_Projects/ESP_FSR_pilot_1/build/bootloader-prefix/src/bootloader-stamp/bootloader-mkdir.rule
+D:/2025-Spring-Cornell-Research/Hardware_Projects/ESP_FSR_pilot_1/build/bootloader-prefix/src/bootloader-stamp/bootloader-patch.rule
+D:/2025-Spring-Cornell-Research/Hardware_Projects/ESP_FSR_pilot_1/build/bootloader-prefix/src/bootloader-stamp/bootloader-update.rule

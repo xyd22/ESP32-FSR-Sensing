@@ -1,0 +1,256 @@
+ets Jun  8 2016 00:22:57
+
+rst:0x1 (POWERON_RESET),boot:0x13 (SPI_FAST_FLASH_BOOT)
+configsip: 0, SPIWP:0xee
+clk_drv:0x00,q_drv:0x00,d_drv:0x00,cs0_drv:0x00,hd_drv:0x00,wp_drv:0x00
+mode:DIO, clock div:2
+load:0x3fff0030,len:6992
+load:0x40078000,len:15512
+load:0x40080400,len:3864
+entry 0x40080650
+[0;32mI (27) boot: ESP-IDF v5.0.3-dirty 2nd stage bootloader[0m
+[0;32mI (27) boot: compile time 20:06:08[0m
+[0;32mI (27) boot: Multicore bootloader[0m
+[0;32mI (30) boot: chip revision: v1.0[0m
+[0;32mI (34) boot.esp32: SPI Speed      : 40MHz[0m
+[0;32mI (39) boot.esp32: SPI Mode       : DIO[0m
+[0;32mI (44) boot.esp32: SPI Flash Size : 2MB[0m
+[0;32mI (48) boot: Enabling RNG early entropy source...[0m
+[0;32mI (54) boot: Partition Table:[0m
+[0;32mI (57) boot: ## Label            Usage          Type ST Offset   Length[0m
+[0;32mI (64) boot:  0 nvs              WiFi data        01 02 00009000 00006000[0m
+[0;32mI (72) boot:  1 phy_init         RF data          01 01 0000f000 00001000[0m
+[0;32mI (79) boot:  2 factory          factory app      00 00 00010000 00100000[0m
+[0;32mI (87) boot: End of partition table[0m
+[0;32mI (91) esp_image: segment 0: paddr=00010020 vaddr=3f400020 size=08e20h ( 36384) map[0m
+[0;32mI (113) esp_image: segment 1: paddr=00018e48 vaddr=3ffb0000 size=01e8ch (  7820) load[0m
+[0;32mI (116) esp_image: segment 2: paddr=0001acdc vaddr=40080000 size=0533ch ( 21308) load[0m
+[0;32mI (127) esp_image: segment 3: paddr=00020020 vaddr=400d0020 size=16d7ch ( 93564) map[0m
+[0;32mI (161) esp_image: segment 4: paddr=00036da4 vaddr=4008533c size=0669ch ( 26268) load[0m
+[0;32mI (178) boot: Loaded app from partition at offset 0x10000[0m
+[0;32mI (178) boot: Disabling RNG early entropy source...[0m
+[0;32mI (190) cpu_start: Multicore app[0m
+[0;32mI (190) cpu_start: Pro cpu up.[0m
+[0;32mI (190) cpu_start: Starting app cpu, entry point is 0x40081048[0m
+[0;32mI (0) cpu_start: App cpu up.[0m
+[0;32mI (208) cpu_start: Pro cpu start user code[0m
+[0;32mI (208) cpu_start: cpu freq: 160000000 Hz[0m
+[0;32mI (208) cpu_start: Application information:[0m
+[0;32mI (213) cpu_start: Project name:     ESP_FSR_pilot_1[0m
+[0;32mI (219) cpu_start: App version:      1[0m
+[0;32mI (223) cpu_start: Compile time:     Mar  4 2025 20:05:52[0m
+[0;32mI (229) cpu_start: ELF file SHA256:  a785cfc1b5bfb08f...[0m
+[0;32mI (235) cpu_start: ESP-IDF:          v5.0.3-dirty[0m
+[0;32mI (240) cpu_start: Min chip rev:     v0.0[0m
+[0;32mI (245) cpu_start: Max chip rev:     v3.99 [0m
+[0;32mI (250) cpu_start: Chip rev:         v1.0[0m
+[0;32mI (255) heap_init: Initializing. RAM available for dynamic allocation:[0m
+[0;32mI (262) heap_init: At 3FFAE6E0 len 00001920 (6 KiB): DRAM[0m
+[0;32mI (268) heap_init: At 3FFB2788 len 0002D878 (182 KiB): DRAM[0m
+[0;32mI (274) heap_init: At 3FFE0440 len 00003AE0 (14 KiB): D/IRAM[0m
+[0;32mI (281) heap_init: At 3FFE4350 len 0001BCB0 (111 KiB): D/IRAM[0m
+[0;32mI (287) heap_init: At 4008B9D8 len 00014628 (81 KiB): IRAM[0m
+[0;32mI (295) spi_flash: detected chip: generic[0m
+[0;32mI (298) spi_flash: flash io: dio[0m
+[0;33mW (302) spi_flash: Detected size(4096k) larger than the size in the binary image header(2048k). Using the size in the binary image header.[0m
+[0;33mW (315) ADC: legacy driver is deprecated, please migrate to `esp_adc/adc_oneshot.h`[0m
+[0;32mI (324) cpu_start: Starting scheduler on PRO CPU.[0m
+[0;32mI (0) cpu_start: Starting scheduler on APP CPU.[0m
+[0;32mI (335) VARISTOR_TEST: ADC9 Value: 4095, Output: 3.30 V, Varistor Resistance: 6920601600000.00 ohms, Force: 0.00 N[0m
+[0;32mI (445) VARISTOR_TEST: ADC9 Value: 4095, Output: 3.30 V, Varistor Resistance: 6920601600000.00 ohms, Force: 0.00 N[0m
+[0;32mI (545) VARISTOR_TEST: ADC9 Value: 4095, Output: 3.30 V, Varistor Resistance: 6920601600000.00 ohms, Force: 0.00 N[0m
+[0;32mI (645) VARISTOR_TEST: ADC9 Value: 4095, Output: 3.30 V, Varistor Resistance: 6920601600000.00 ohms, Force: 0.00 N[0m
+[0;32mI (745) VARISTOR_TEST: ADC9 Value: 4095, Output: 3.30 V, Varistor Resistance: 6920601600000.00 ohms, Force: 0.00 N[0m
+[0;32mI (845) VARISTOR_TEST: ADC9 Value: 4095, Output: 3.30 V, Varistor Resistance: 6920601600000.00 ohms, Force: 0.00 N[0m
+[0;32mI (945) VARISTOR_TEST: ADC9 Value: 4095, Output: 3.30 V, Varistor Resistance: 6920601600000.00 ohms, Force: 0.00 N[0m
+[0;32mI (1045) VARISTOR_TEST: ADC9 Value: 4095, Output: 3.30 V, Varistor Resistance: 6920601600000.00 ohms, Force: 0.00 N[0m
+[0;32mI (1145) VARISTOR_TEST: ADC9 Value: 4095, Output: 3.30 V, Varistor Resistance: 6920601600000.00 ohms, Force: 0.00 N[0m
+[0;32mI (1245) VARISTOR_TEST: ADC9 Value: 4095, Output: 3.30 V, Varistor Resistance: 6920601600000.00 ohms, Force: 0.00 N[0m
+[0;32mI (1345) VARISTOR_TEST: ADC9 Value: 4095, Output: 3.30 V, Varistor Resistance: 6920601600000.00 ohms, Force: 0.00 N[0m
+[0;32mI (1445) VARISTOR_TEST: ADC9 Value: 4095, Output: 3.30 V, Varistor Resistance: 6920601600000.00 ohms, Force: 0.00 N[0m
+[0;32mI (1545) VARISTOR_TEST: ADC9 Value: 4095, Output: 3.30 V, Varistor Resistance: 6920601600000.00 ohms, Force: 0.00 N[0m
+[0;32mI (1645) VARISTOR_TEST: ADC9 Value: 4095, Output: 3.30 V, Varistor Resistance: 6920601600000.00 ohms, Force: 0.00 N[0m
+[0;32mI (1745) VARISTOR_TEST: ADC9 Value: 4095, Output: 3.30 V, Varistor Resistance: 6920601600000.00 ohms, Force: 0.00 N[0m
+[0;32mI (1845) VARISTOR_TEST: ADC9 Value: 4095, Output: 3.30 V, Varistor Resistance: 6920601600000.00 ohms, Force: 0.00 N[0m
+[0;32mI (1945) VARISTOR_TEST: ADC9 Value: 4095, Output: 3.30 V, Varistor Resistance: 6920601600000.00 ohms, Force: 0.00 N[0m
+[0;32mI (2045) VARISTOR_TEST: ADC9 Value: 4095, Output: 3.30 V, Varistor Resistance: 6920601600000.00 ohms, Force: 0.00 N[0m
+[0;32mI (2145) VARISTOR_TEST: ADC9 Value: 4095, Output: 3.30 V, Varistor Resistance: 6920601600000.00 ohms, Force: 0.00 N[0m
+[0;32mI (2245) VARISTOR_TEST: ADC9 Value: 4095, Output: 3.30 V, Varistor Resistance: 6920601600000.00 ohms, Force: 0.00 N[0m
+[0;32mI (2345) VARISTOR_TEST: ADC9 Value: 4095, Output: 3.30 V, Varistor Resistance: 6920601600000.00 ohms, Force: 0.00 N[0m
+[0;32mI (2445) VARISTOR_TEST: ADC9 Value: 4095, Output: 3.30 V, Varistor Resistance: 6920601600000.00 ohms, Force: 0.00 N[0m
+[0;32mI (2545) VARISTOR_TEST: ADC9 Value: 4095, Output: 3.30 V, Varistor Resistance: 6920601600000.00 ohms, Force: 0.00 N[0m
+[0;32mI (2645) VARISTOR_TEST: ADC9 Value: 4095, Output: 3.30 V, Varistor Resistance: 6920601600000.00 ohms, Force: 0.00 N[0m
+[0;32mI (2745) VARISTOR_TEST: ADC9 Value: 4095, Output: 3.30 V, Varistor Resistance: 6920601600000.00 ohms, Force: 0.00 N[0m
+[0;32mI (2845) VARISTOR_TEST: ADC9 Value: 4095, Output: 3.30 V, Varistor Resistance: 6920601600000.00 ohms, Force: 0.00 N[0m
+[0;32mI (2945) VARISTOR_TEST: ADC9 Value: 4095, Output: 3.30 V, Varistor Resistance: 6920601600000.00 ohms, Force: 0.00 N[0m
+[0;32mI (3045) VARISTOR_TEST: ADC9 Value: 4095, Output: 3.30 V, Varistor Resistance: 6920601600000.00 ohms, Force: 0.00 N[0m
+[0;32mI (3145) VARISTOR_TEST: ADC9 Value: 4095, Output: 3.30 V, Varistor Resistance: 6920601600000.00 ohms, Force: 0.00 N[0m
+[0;32mI (3245) VARISTOR_TEST: ADC9 Value: 4095, Output: 3.30 V, Varistor Resistance: 6920601600000.00 ohms, Force: 0.00 N[0m
+[0;32mI (3345) VARISTOR_TEST: ADC9 Value: 4095, Output: 3.30 V, Varistor Resistance: 6920601600000.00 ohms, Force: 0.00 N[0m
+[0;32mI (3445) VARISTOR_TEST: ADC9 Value: 4095, Output: 3.30 V, Varistor Resistance: 6920601600000.00 ohms, Force: 0.00 N[0m
+[0;32mI (3545) VARISTOR_TEST: ADC9 Value: 4095, Output: 3.30 V, Varistor Resistance: 6920601600000.00 ohms, Force: 0.00 N[0m
+[0;32mI (3645) VARISTOR_TEST: ADC9 Value: 4095, Output: 3.30 V, Varistor Resistance: 6920601600000.00 ohms, Force: 0.00 N[0m
+[0;32mI (3745) VARISTOR_TEST: ADC9 Value: 4095, Output: 3.30 V, Varistor Resistance: 6920601600000.00 ohms, Force: 0.00 N[0m
+[0;32mI (3845) VARISTOR_TEST: ADC9 Value: 3813, Output: 3.07 V, Varistor Resistance: 1352127.62 ohms, Force: 0.01 N[0m
+[0;32mI (3945) VARISTOR_TEST: ADC9 Value: 2931, Output: 2.36 V, Varistor Resistance: 251804.14 ohms, Force: 0.05 N[0m
+[0;32mI (4045) VARISTOR_TEST: ADC9 Value: 2685, Output: 2.16 V, Varistor Resistance: 190425.55 ohms, Force: 0.07 N[0m
+[0;32mI (4145) VARISTOR_TEST: ADC9 Value: 2624, Output: 2.11 V, Varistor Resistance: 178382.05 ohms, Force: 0.07 N[0m
+[0;32mI (4245) VARISTOR_TEST: ADC9 Value: 2289, Output: 1.84 V, Varistor Resistance: 126744.20 ohms, Force: 0.10 N[0m
+[0;32mI (4345) VARISTOR_TEST: ADC9 Value: 2724, Output: 2.20 V, Varistor Resistance: 198687.11 ohms, Force: 0.06 N[0m
+[0;32mI (4445) VARISTOR_TEST: ADC9 Value: 2316, Output: 1.87 V, Varistor Resistance: 130185.51 ohms, Force: 0.10 N[0m
+[0;32mI (4545) VARISTOR_TEST: ADC9 Value: 2523, Output: 2.03 V, Varistor Resistance: 160496.20 ohms, Force: 0.08 N[0m
+[0;32mI (4645) VARISTOR_TEST: ADC9 Value: 2046, Output: 1.65 V, Varistor Resistance: 99853.59 ohms, Force: 0.13 N[0m
+[0;32mI (4745) VARISTOR_TEST: ADC9 Value: 1890, Output: 1.52 V, Varistor Resistance: 85714.28 ohms, Force: 0.15 N[0m
+[0;32mI (4845) VARISTOR_TEST: ADC9 Value: 1783, Output: 1.44 V, Varistor Resistance: 77119.38 ohms, Force: 0.16 N[0m
+[0;32mI (4945) VARISTOR_TEST: ADC9 Value: 1827, Output: 1.47 V, Varistor Resistance: 80555.55 ohms, Force: 0.16 N[0m
+[0;32mI (5045) VARISTOR_TEST: ADC9 Value: 1671, Output: 1.35 V, Varistor Resistance: 68935.64 ohms, Force: 0.18 N[0m
+[0;32mI (5145) VARISTOR_TEST: ADC9 Value: 1803, Output: 1.45 V, Varistor Resistance: 78664.92 ohms, Force: 0.16 N[0m
+[0;32mI (5245) VARISTOR_TEST: ADC9 Value: 1774, Output: 1.43 V, Varistor Resistance: 76432.59 ohms, Force: 0.16 N[0m
+[0;32mI (5345) VARISTOR_TEST: ADC9 Value: 2795, Output: 2.25 V, Varistor Resistance: 215000.03 ohms, Force: 0.06 N[0m
+[0;32mI (5445) VARISTOR_TEST: ADC9 Value: 2400, Output: 1.93 V, Varistor Resistance: 141592.94 ohms, Force: 0.09 N[0m
+[0;32mI (5545) VARISTOR_TEST: ADC9 Value: 2718, Output: 2.19 V, Varistor Resistance: 197385.66 ohms, Force: 0.06 N[0m
+[0;32mI (5645) VARISTOR_TEST: ADC9 Value: 2614, Output: 2.11 V, Varistor Resistance: 176502.38 ohms, Force: 0.07 N[0m
+[0;32mI (5745) VARISTOR_TEST: ADC9 Value: 3888, Output: 3.13 V, Varistor Resistance: 1878260.88 ohms, Force: 0.01 N[0m
+[0;32mI (5845) VARISTOR_TEST: ADC9 Value: 4095, Output: 3.30 V, Varistor Resistance: 6920601600000.00 ohms, Force: 0.00 N[0m
+[0;32mI (5945) VARISTOR_TEST: ADC9 Value: 4095, Output: 3.30 V, Varistor Resistance: 6920601600000.00 ohms, Force: 0.00 N[0m
+[0;32mI (6045) VARISTOR_TEST: ADC9 Value: 4095, Output: 3.30 V, Varistor Resistance: 6920601600000.00 ohms, Force: 0.00 N[0m
+[0;32mI (6145) VARISTOR_TEST: ADC9 Value: 4095, Output: 3.30 V, Varistor Resistance: 6920601600000.00 ohms, Force: 0.00 N[0m
+[0;32mI (6245) VARISTOR_TEST: ADC9 Value: 4095, Output: 3.30 V, Varistor Resistance: 6920601600000.00 ohms, Force: 0.00 N[0m
+[0;32mI (6345) VARISTOR_TEST: ADC9 Value: 4095, Output: 3.30 V, Varistor Resistance: 6920601600000.00 ohms, Force: 0.00 N[0m
+[0;32mI (6445) VARISTOR_TEST: ADC9 Value: 4095, Output: 3.30 V, Varistor Resistance: 6920601600000.00 ohms, Force: 0.00 N[0m
+[0;32mI (6545) VARISTOR_TEST: ADC9 Value: 4095, Output: 3.30 V, Varistor Resistance: 6920601600000.00 ohms, Force: 0.00 N[0m
+[0;32mI (6645) VARISTOR_TEST: ADC9 Value: 4095, Output: 3.30 V, Varistor Resistance: 6920601600000.00 ohms, Force: 0.00 N[0m
+[0;32mI (6745) VARISTOR_TEST: ADC9 Value: 4095, Output: 3.30 V, Varistor Resistance: 6920601600000.00 ohms, Force: 0.00 N[0m
+[0;32mI (6845) VARISTOR_TEST: ADC9 Value: 4095, Output: 3.30 V, Varistor Resistance: 6920601600000.00 ohms, Force: 0.00 N[0m
+[0;32mI (6945) VARISTOR_TEST: ADC9 Value: 4095, Output: 3.30 V, Varistor Resistance: 6920601600000.00 ohms, Force: 0.00 N[0m
+[0;32mI (7045) VARISTOR_TEST: ADC9 Value: 4095, Output: 3.30 V, Varistor Resistance: 6920601600000.00 ohms, Force: 0.00 N[0m
+[0;32mI (7145) VARISTOR_TEST: ADC9 Value: 4095, Output: 3.30 V, Varistor Resistance: 6920601600000.00 ohms, Force: 0.00 N[0m
+[0;32mI (7245) VARISTOR_TEST: ADC9 Value: 4095, Output: 3.30 V, Varistor Resistance: 6920601600000.00 ohms, Force: 0.00 N[0m
+[0;32mI (7345) VARISTOR_TEST: ADC9 Value: 4095, Output: 3.30 V, Varistor Resistance: 6920601600000.00 ohms, Force: 0.00 N[0m
+[0;32mI (7445) VARISTOR_TEST: ADC9 Value: 4095, Output: 3.30 V, Varistor Resistance: 6920601600000.00 ohms, Force: 0.00 N[0m
+[0;32mI (7545) VARISTOR_TEST: ADC9 Value: 4095, Output: 3.30 V, Varistor Resistance: 6920601600000.00 ohms, Force: 0.00 N[0m
+[0;32mI (7645) VARISTOR_TEST: ADC9 Value: 4095, Output: 3.30 V, Varistor Resistance: 6920601600000.00 ohms, Force: 0.00 N[0m
+[0;32mI (7745) VARISTOR_TEST: ADC9 Value: 4095, Output: 3.30 V, Varistor Resistance: 6920601600000.00 ohms, Force: 0.00 N[0m
+[0;32mI (7845) VARISTOR_TEST: ADC9 Value: 4095, Output: 3.30 V, Varistor Resistance: 6920601600000.00 ohms, Force: 0.00 N[0m
+[0;32mI (7945) VARISTOR_TEST: ADC9 Value: 4095, Output: 3.30 V, Varistor Resistance: 6920601600000.00 ohms, Force: 0.00 N[0m
+[0;32mI (8045) VARISTOR_TEST: ADC9 Value: 4095, Output: 3.30 V, Varistor Resistance: 6920601600000.00 ohms, Force: 0.00 N[0m
+[0;32mI (8145) VARISTOR_TEST: ADC9 Value: 4095, Output: 3.30 V, Varistor Resistance: 6920601600000.00 ohms, Force: 0.00 N[0m
+[0;32mI (8245) VARISTOR_TEST: ADC9 Value: 4095, Output: 3.30 V, Varistor Resistance: 6920601600000.00 ohms, Force: 0.00 N[0m
+[0;32mI (8345) VARISTOR_TEST: ADC9 Value: 4095, Output: 3.30 V, Varistor Resistance: 6920601600000.00 ohms, Force: 0.00 N[0m
+[0;32mI (8445) VARISTOR_TEST: ADC9 Value: 4095, Output: 3.30 V, Varistor Resistance: 6920601600000.00 ohms, Force: 0.00 N[0m
+[0;32mI (8545) VARISTOR_TEST: ADC9 Value: 4095, Output: 3.30 V, Varistor Resistance: 6920601600000.00 ohms, Force: 0.00 N[0m
+[0;32mI (8645) VARISTOR_TEST: ADC9 Value: 4095, Output: 3.30 V, Varistor Resistance: 6920601600000.00 ohms, Force: 0.00 N[0m
+[0;32mI (8745) VARISTOR_TEST: ADC9 Value: 4095, Output: 3.30 V, Varistor Resistance: 6920601600000.00 ohms, Force: 0.00 N[0m
+[0;32mI (8845) VARISTOR_TEST: ADC9 Value: 4095, Output: 3.30 V, Varistor Resistance: 6920601600000.00 ohms, Force: 0.00 N[0m
+[0;32mI (8945) VARISTOR_TEST: ADC9 Value: 4095, Output: 3.30 V, Varistor Resistance: 6920601600000.00 ohms, Force: 0.00 N[0m
+[0;32mI (9045) VARISTOR_TEST: ADC9 Value: 4095, Output: 3.30 V, Varistor Resistance: 6920601600000.00 ohms, Force: 0.00 N[0m
+[0;32mI (9145) VARISTOR_TEST: ADC9 Value: 4095, Output: 3.30 V, Varistor Resistance: 6920601600000.00 ohms, Force: 0.00 N[0m
+[0;32mI (9245) VARISTOR_TEST: ADC9 Value: 4095, Output: 3.30 V, Varistor Resistance: 6920601600000.00 ohms, Force: 0.00 N[0m
+[0;32mI (9345) VARISTOR_TEST: ADC9 Value: 4095, Output: 3.30 V, Varistor Resistance: 6920601600000.00 ohms, Force: 0.00 N[0m
+[0;32mI (9445) VARISTOR_TEST: ADC9 Value: 4095, Output: 3.30 V, Varistor Resistance: 6920601600000.00 ohms, Force: 0.00 N[0m
+[0;32mI (9545) VARISTOR_TEST: ADC9 Value: 4095, Output: 3.30 V, Varistor Resistance: 6920601600000.00 ohms, Force: 0.00 N[0m
+[0;32mI (9645) VARISTOR_TEST: ADC9 Value: 4095, Output: 3.30 V, Varistor Resistance: 6920601600000.00 ohms, Force: 0.00 N[0m
+[0;32mI (9745) VARISTOR_TEST: ADC9 Value: 4095, Output: 3.30 V, Varistor Resistance: 6920601600000.00 ohms, Force: 0.00 N[0m
+[0;32mI (9845) VARISTOR_TEST: ADC9 Value: 4095, Output: 3.30 V, Varistor Resistance: 6920601600000.00 ohms, Force: 0.00 N[0m
+[0;32mI (9945) VARISTOR_TEST: ADC9 Value: 4095, Output: 3.30 V, Varistor Resistance: 6920601600000.00 ohms, Force: 0.00 N[0m
+[0;32mI (10045) VARISTOR_TEST: ADC9 Value: 4095, Output: 3.30 V, Varistor Resistance: 6920601600000.00 ohms, Force: 0.00 N[0m
+[0;32mI (10145) VARISTOR_TEST: ADC9 Value: 4095, Output: 3.30 V, Varistor Resistance: 6920601600000.00 ohms, Force: 0.00 N[0m
+[0;32mI (10245) VARISTOR_TEST: ADC9 Value: 4095, Output: 3.30 V, Varistor Resistance: 6920601600000.00 ohms, Force: 0.00 N[0m
+[0;32mI (10345) VARISTOR_TEST: ADC9 Value: 4095, Output: 3.30 V, Varistor Resistance: 6920601600000.00 ohms, Force: 0.00 N[0m
+[0;32mI (10445) VARISTOR_TEST: ADC9 Value: 4095, Output: 3.30 V, Varistor Resistance: 6920601600000.00 ohms, Force: 0.00 N[0m
+[0;32mI (10545) VARISTOR_TEST: ADC9 Value: 4095, Output: 3.30 V, Varistor Resistance: 6920601600000.00 ohms, Force: 0.00 N[0m
+[0;32mI (10645) VARISTOR_TEST: ADC9 Value: 4095, Output: 3.30 V, Varistor Resistance: 6920601600000.00 ohms, Force: 0.00 N[0m
+[0;32mI (10745) VARISTOR_TEST: ADC9 Value: 4095, Output: 3.30 V, Varistor Resistance: 6920601600000.00 ohms, Force: 0.00 N[0m
+[0;32mI (10845) VARISTOR_TEST: ADC9 Value: 3452, Output: 2.78 V, Varistor Resistance: 536858.44 ohms, Force: 0.02 N[0m
+[0;32mI (10945) VARISTOR_TEST: ADC9 Value: 3299, Output: 2.66 V, Varistor Resistance: 414447.19 ohms, Force: 0.03 N[0m
+[0;32mI (11045) VARISTOR_TEST: ADC9 Value: 2471, Output: 1.99 V, Varistor Resistance: 152155.19 ohms, Force: 0.08 N[0m
+[0;32mI (11145) VARISTOR_TEST: ADC9 Value: 2426, Output: 1.96 V, Varistor Resistance: 145356.52 ohms, Force: 0.09 N[0m
+[0;32mI (11245) VARISTOR_TEST: ADC9 Value: 2117, Output: 1.71 V, Varistor Resistance: 107027.31 ohms, Force: 0.12 N[0m
+[0;32mI (11345) VARISTOR_TEST: ADC9 Value: 2543, Output: 2.05 V, Varistor Resistance: 163853.09 ohms, Force: 0.08 N[0m
+[0;32mI (11445) VARISTOR_TEST: ADC9 Value: 2075, Output: 1.67 V, Varistor Resistance: 102722.78 ohms, Force: 0.12 N[0m
+[0;32mI (11545) VARISTOR_TEST: ADC9 Value: 1870, Output: 1.51 V, Varistor Resistance: 84044.95 ohms, Force: 0.15 N[0m
+[0;32mI (11645) VARISTOR_TEST: ADC9 Value: 1727, Output: 1.39 V, Varistor Resistance: 72930.74 ohms, Force: 0.17 N[0m
+[0;32mI (11745) VARISTOR_TEST: ADC9 Value: 1812, Output: 1.46 V, Varistor Resistance: 79369.25 ohms, Force: 0.16 N[0m
+[0;32mI (11845) VARISTOR_TEST: ADC9 Value: 1815, Output: 1.46 V, Varistor Resistance: 79605.27 ohms, Force: 0.16 N[0m
+[0;32mI (11945) VARISTOR_TEST: ADC9 Value: 1850, Output: 1.49 V, Varistor Resistance: 82405.34 ohms, Force: 0.15 N[0m
+[0;32mI (12045) VARISTOR_TEST: ADC9 Value: 1730, Output: 1.39 V, Varistor Resistance: 73150.10 ohms, Force: 0.17 N[0m
+[0;32mI (12145) VARISTOR_TEST: ADC9 Value: 1433, Output: 1.15 V, Varistor Resistance: 53831.70 ohms, Force: 0.23 N[0m
+[0;32mI (12245) VARISTOR_TEST: ADC9 Value: 1475, Output: 1.19 V, Varistor Resistance: 56297.71 ohms, Force: 0.22 N[0m
+[0;32mI (12345) VARISTOR_TEST: ADC9 Value: 1715, Output: 1.38 V, Varistor Resistance: 72058.83 ohms, Force: 0.17 N[0m
+[0;32mI (12445) VARISTOR_TEST: ADC9 Value: 1511, Output: 1.22 V, Varistor Resistance: 58475.23 ohms, Force: 0.21 N[0m
+[0;32mI (12545) VARISTOR_TEST: ADC9 Value: 1364, Output: 1.10 V, Varistor Resistance: 49945.08 ohms, Force: 0.25 N[0m
+[0;32mI (12645) VARISTOR_TEST: ADC9 Value: 1790, Output: 1.44 V, Varistor Resistance: 77657.27 ohms, Force: 0.16 N[0m
+[0;32mI (12745) VARISTOR_TEST: ADC9 Value: 2434, Output: 1.96 V, Varistor Resistance: 146538.23 ohms, Force: 0.09 N[0m
+[0;32mI (12845) VARISTOR_TEST: ADC9 Value: 2554, Output: 2.06 V, Varistor Resistance: 165736.56 ohms, Force: 0.08 N[0m
+[0;32mI (12945) VARISTOR_TEST: ADC9 Value: 2822, Output: 2.27 V, Varistor Resistance: 221681.06 ohms, Force: 0.06 N[0m
+[0;32mI (13045) VARISTOR_TEST: ADC9 Value: 3058, Output: 2.46 V, Varistor Resistance: 294889.09 ohms, Force: 0.04 N[0m
+[0;32mI (13145) VARISTOR_TEST: ADC9 Value: 2817, Output: 2.27 V, Varistor Resistance: 220422.55 ohms, Force: 0.06 N[0m
+[0;32mI (13245) VARISTOR_TEST: ADC9 Value: 2950, Output: 2.38 V, Varistor Resistance: 257641.98 ohms, Force: 0.05 N[0m
+[0;32mI (13345) VARISTOR_TEST: ADC9 Value: 3497, Output: 2.82 V, Varistor Resistance: 584782.56 ohms, Force: 0.02 N[0m
+[0;32mI (13445) VARISTOR_TEST: ADC9 Value: 3424, Output: 2.76 V, Varistor Resistance: 510283.09 ohms, Force: 0.02 N[0m
+[0;32mI (13545) VARISTOR_TEST: ADC9 Value: 4095, Output: 3.30 V, Varistor Resistance: 6920601600000.00 ohms, Force: 0.00 N[0m
+[0;32mI (13645) VARISTOR_TEST: ADC9 Value: 4095, Output: 3.30 V, Varistor Resistance: 6920601600000.00 ohms, Force: 0.00 N[0m
+[0;32mI (13745) VARISTOR_TEST: ADC9 Value: 4095, Output: 3.30 V, Varistor Resistance: 6920601600000.00 ohms, Force: 0.00 N[0m
+[0;32mI (13845) VARISTOR_TEST: ADC9 Value: 4095, Output: 3.30 V, Varistor Resistance: 6920601600000.00 ohms, Force: 0.00 N[0m
+[0;32mI (13945) VARISTOR_TEST: ADC9 Value: 4095, Output: 3.30 V, Varistor Resistance: 6920601600000.00 ohms, Force: 0.00 N[0m
+[0;32mI (14045) VARISTOR_TEST: ADC9 Value: 4095, Output: 3.30 V, Varistor Resistance: 6920601600000.00 ohms, Force: 0.00 N[0m
+[0;32mI (14145) VARISTOR_TEST: ADC9 Value: 4095, Output: 3.30 V, Varistor Resistance: 6920601600000.00 ohms, Force: 0.00 N[0m
+[0;32mI (14245) VARISTOR_TEST: ADC9 Value: 4095, Output: 3.30 V, Varistor Resistance: 6920601600000.00 ohms, Force: 0.00 N[0m
+[0;32mI (14345) VARISTOR_TEST: ADC9 Value: 4095, Output: 3.30 V, Varistor Resistance: 6920601600000.00 ohms, Force: 0.00 N[0m
+[0;32mI (14445) VARISTOR_TEST: ADC9 Value: 4095, Output: 3.30 V, Varistor Resistance: 6920601600000.00 ohms, Force: 0.00 N[0m
+[0;32mI (14545) VARISTOR_TEST: ADC9 Value: 4095, Output: 3.30 V, Varistor Resistance: 6920601600000.00 ohms, Force: 0.00 N[0m
+[0;32mI (14645) VARISTOR_TEST: ADC9 Value: 4095, Output: 3.30 V, Varistor Resistance: 6920601600000.00 ohms, Force: 0.00 N[0m
+[0;32mI (14745) VARISTOR_TEST: ADC9 Value: 4095, Output: 3.30 V, Varistor Resistance: 6920601600000.00 ohms, Force: 0.00 N[0m
+[0;32mI (14845) VARISTOR_TEST: ADC9 Value: 4095, Output: 3.30 V, Varistor Resistance: 6920601600000.00 ohms, Force: 0.00 N[0m
+[0;32mI (14945) VARISTOR_TEST: ADC9 Value: 4095, Output: 3.30 V, Varistor Resistance: 6920601600000.00 ohms, Force: 0.00 N[0m
+[0;32mI (15045) VARISTOR_TEST: ADC9 Value: 4095, Output: 3.30 V, Varistor Resistance: 6920601600000.00 ohms, Force: 0.00 N[0m
+[0;32mI (15145) VARISTOR_TEST: ADC9 Value: 4095, Output: 3.30 V, Varistor Resistance: 6920601600000.00 ohms, Force: 0.00 N[0m
+[0;32mI (15245) VARISTOR_TEST: ADC9 Value: 4095, Output: 3.30 V, Varistor Resistance: 6920601600000.00 ohms, Force: 0.00 N[0m
+[0;32mI (15345) VARISTOR_TEST: ADC9 Value: 4095, Output: 3.30 V, Varistor Resistance: 6920601600000.00 ohms, Force: 0.00 N[0m
+[0;32mI (15445) VARISTOR_TEST: ADC9 Value: 4095, Output: 3.30 V, Varistor Resistance: 6920601600000.00 ohms, Force: 0.00 N[0m
+[0;32mI (15545) VARISTOR_TEST: ADC9 Value: 4095, Output: 3.30 V, Varistor Resistance: 6920601600000.00 ohms, Force: 0.00 N[0m
+[0;32mI (15645) VARISTOR_TEST: ADC9 Value: 4095, Output: 3.30 V, Varistor Resistance: 6920601600000.00 ohms, Force: 0.00 N[0m
+[0;32mI (15745) VARISTOR_TEST: ADC9 Value: 4095, Output: 3.30 V, Varistor Resistance: 6920601600000.00 ohms, Force: 0.00 N[0m
+[0;32mI (15845) VARISTOR_TEST: ADC9 Value: 4095, Output: 3.30 V, Varistor Resistance: 6920601600000.00 ohms, Force: 0.00 N[0m
+[0;32mI (15945) VARISTOR_TEST: ADC9 Value: 4095, Output: 3.30 V, Varistor Resistance: 6920601600000.00 ohms, Force: 0.00 N[0m
+[0;32mI (16045) VARISTOR_TEST: ADC9 Value: 4095, Output: 3.30 V, Varistor Resistance: 6920601600000.00 ohms, Force: 0.00 N[0m
+[0;32mI (16145) VARISTOR_TEST: ADC9 Value: 4095, Output: 3.30 V, Varistor Resistance: 6920601600000.00 ohms, Force: 0.00 N[0m
+[0;32mI (16245) VARISTOR_TEST: ADC9 Value: 4095, Output: 3.30 V, Varistor Resistance: 6920601600000.00 ohms, Force: 0.00 N[0m
+[0;32mI (16345) VARISTOR_TEST: ADC9 Value: 4095, Output: 3.30 V, Varistor Resistance: 6920601600000.00 ohms, Force: 0.00 N[0m
+[0;32mI (16445) VARISTOR_TEST: ADC9 Value: 4095, Output: 3.30 V, Varistor Resistance: 6920601600000.00 ohms, Force: 0.00 N[0m
+[0;32mI (16545) VARISTOR_TEST: ADC9 Value: 4095, Output: 3.30 V, Varistor Resistance: 6920601600000.00 ohms, Force: 0.00 N[0m
+[0;32mI (16645) VARISTOR_TEST: ADC9 Value: 4095, Output: 3.30 V, Varistor Resistance: 6920601600000.00 ohms, Force: 0.00 N[0m
+[0;32mI (16745) VARISTOR_TEST: ADC9 Value: 4095, Output: 3.30 V, Varistor Resistance: 6920601600000.00 ohms, Force: 0.00 N[0m
+[0;32mI (16845) VARISTOR_TEST: ADC9 Value: 4095, Output: 3.30 V, Varistor Resistance: 6920601600000.00 ohms, Force: 0.00 N[0m
+[0;32mI (16945) VARISTOR_TEST: ADC9 Value: 4095, Output: 3.30 V, Varistor Resistance: 6920601600000.00 ohms, Force: 0.00 N[0m
+[0;32mI (17045) VARISTOR_TEST: ADC9 Value: 4095, Output: 3.30 V, Varistor Resistance: 6920601600000.00 ohms, Force: 0.00 N[0m
+[0;32mI (17145) VARISTOR_TEST: ADC9 Value: 4095, Output: 3.30 V, Varistor Resistance: 6920601600000.00 ohms, Force: 0.00 N[0m
+[0;32mI (17245) VARISTOR_TEST: ADC9 Value: 4095, Output: 3.30 V, Varistor Resistance: 6920601600000.00 ohms, Force: 0.00 N[0m
+[0;32mI (17345) VARISTOR_TEST: ADC9 Value: 4095, Output: 3.30 V, Varistor Resistance: 6920601600000.00 ohms, Force: 0.00 N[0m
+[0;32mI (17445) VARISTOR_TEST: ADC9 Value: 3473, Output: 2.80 V, Varistor Resistance: 558360.25 ohms, Force: 0.02 N[0m
+[0;32mI (17545) VARISTOR_TEST: ADC9 Value: 3293, Output: 2.65 V, Varistor Resistance: 410598.50 ohms, Force: 0.03 N[0m
+[0;32mI (17645) VARISTOR_TEST: ADC9 Value: 2343, Output: 1.89 V, Varistor Resistance: 133732.89 ohms, Force: 0.09 N[0m
+[0;32mI (17745) VARISTOR_TEST: ADC9 Value: 1899, Output: 1.53 V, Varistor Resistance: 86475.41 ohms, Force: 0.14 N[0m
+[0;32mI (17845) VARISTOR_TEST: ADC9 Value: 2593, Output: 2.09 V, Varistor Resistance: 172636.52 ohms, Force: 0.07 N[0m
+[0;32mI (17945) VARISTOR_TEST: ADC9 Value: 4095, Output: 3.30 V, Varistor Resistance: 6920601600000.00 ohms, Force: 0.00 N[0m
+[0;32mI (18045) VARISTOR_TEST: ADC9 Value: 4095, Output: 3.30 V, Varistor Resistance: 6920601600000.00 ohms, Force: 0.00 N[0m
+[0;32mI (18145) VARISTOR_TEST: ADC9 Value: 4095, Output: 3.30 V, Varistor Resistance: 6920601600000.00 ohms, Force: 0.00 N[0m
+[0;32mI (18245) VARISTOR_TEST: ADC9 Value: 4095, Output: 3.30 V, Varistor Resistance: 6920601600000.00 ohms, Force: 0.00 N[0m
+[0;32mI (18345) VARISTOR_TEST: ADC9 Value: 4095, Output: 3.30 V, Varistor Resistance: 6920601600000.00 ohms, Force: 0.00 N[0m
+[0;32mI (18445) VARISTOR_TEST: ADC9 Value: 4095, Output: 3.30 V, Varistor Resistance: 6920601600000.00 ohms, Force: 0.00 N[0m
+[0;32mI (18545) VARISTOR_TEST: ADC9 Value: 4095, Output: 3.30 V, Varistor Resistance: 6920601600000.00 ohms, Force: 0.00 N[0m
+[0;32mI (18645) VARISTOR_TEST: ADC9 Value: 4095, Output: 3.30 V, Varistor Resistance: 6920601600000.00 ohms, Force: 0.00 N[0m
+[0;32mI (18745) VARISTOR_TEST: ADC9 Value: 4095, Output: 3.30 V, Varistor Resistance: 6920601600000.00 ohms, Force: 0.00 N[0m
+[0;32mI (18845) VARISTOR_TEST: ADC9 Value: 4095, Output: 3.30 V, Varistor Resistance: 6920601600000.00 ohms, Force: 0.00 N[0m
+[0;32mI (18945) VARISTOR_TEST: ADC9 Value: 4095, Output: 3.30 V, Varistor Resistance: 6920601600000.00 ohms, Force: 0.00 N[0m
+[0;32mI (19045) VARISTOR_TEST: ADC9 Value: 4095, Output: 3.30 V, Varistor Resistance: 6920601600000.00 ohms, Force: 0.00 N[0m
+[0;32mI (19145) VARISTOR_TEST: ADC9 Value: 4095, Output: 3.30 V, Varistor Resistance: 6920601600000.00 ohms, Force: 0.00 N[0m
+[0;32mI (19245) VARISTOR_TEST: ADC9 Value: 4095, Output: 3.30 V, Varistor Resistance: 6920601600000.00 ohms, Force: 0.00 N[0m
+[0;32mI (19345) VARISTOR_TEST: ADC9 Value: 4095, Output: 3.30 V, Varistor Resistance: 6920601600000.00 ohms, Force: 0.00 N[0m
+[0;32mI (19445) VARISTOR_TEST: ADC9 Value: 4095, Output: 3.30 V, Varistor Resistance: 6920601600000.00 ohms, Force: 0.00 N[0m
+[0;32mI (19545) VARISTOR_TEST: ADC9 Value: 4095, Output: 3.30 V, Varistor Resistance: 6920601600000.00 ohms, Force: 0.00 N[0m
+[0;32mI (19645) VARISTOR_TEST: ADC9 Value: 4095, Output: 3.30 V, Varistor Resistance: 6920601600000.00 ohms, Force: 0.00 N[0m
+[0;32mI (19745) VARISTOR_TEST: ADC9 Value: 4095, Output: 3.30 V, Varistor Resistance: 6920601600000.00 ohms, Force: 0.00 N[0m
+[0;32mI (19845) VARISTOR_TEST: ADC9 Value: 4095, Output: 3.30 V, Varistor Resistance: 6920601600000.00 ohms, Force: 0.00 N[0m
+[0;32mI (19945) VARISTOR_TEST: ADC9 Value: 4095, Output: 3.30 V, Varistor Resistance: 6920601600000.00 ohms, Force: 0.00 N[0m
+[0;32mI (20045) VARISTOR_TEST: ADC9 Value: 4095, Output: 3.30 V, Varistor Resistance: 6920601600000.00 ohms, Force: 0.00 N[0m

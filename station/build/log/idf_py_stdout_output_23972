@@ -1,0 +1,589 @@
+ets Jun  8 2016 00:22:57
+
+rst:0x1 (POWERON_RESET),boot:0x13 (SPI_FAST_FLASH_BOOT)
+configsip: 0, SPIWP:0xee
+clk_drv:0x00,q_drv:0x00,d_drv:0x00,cs0_drv:0x00,hd_drv:0x00,wp_drv:0x00
+mode:DIO, clock div:2
+load:0x3fff0030,len:6992
+load:0x40078000,len:15512
+load:0x40080400,len:3864
+entry 0x40080650
+[0;32mI (27) boot: ESP-IDF v5.0.3-dirty 2nd stage bootloader[0m
+[0;32mI (27) boot: compile time 11:28:48[0m
+[0;32mI (27) boot: Multicore bootloader[0m
+[0;32mI (30) boot: chip revision: v1.0[0m
+[0;32mI (34) boot.esp32: SPI Speed      : 40MHz[0m
+[0;32mI (39) boot.esp32: SPI Mode       : DIO[0m
+[0;32mI (43) boot.esp32: SPI Flash Size : 2MB[0m
+[0;32mI (48) boot: Enabling RNG early entropy source...[0m
+[0;32mI (53) boot: Partition Table:[0m
+[0;32mI (57) boot: ## Label            Usage          Type ST Offset   Length[0m
+[0;32mI (64) boot:  0 nvs              WiFi data        01 02 00009000 00006000[0m
+[0;32mI (72) boot:  1 phy_init         RF data          01 01 0000f000 00001000[0m
+[0;32mI (79) boot:  2 factory          factory app      00 00 00010000 00100000[0m
+[0;32mI (87) boot: End of partition table[0m
+[0;32mI (91) esp_image: segment 0: paddr=00010020 vaddr=3f400020 size=1ea94h (125588) map[0m
+[0;32mI (145) esp_image: segment 1: paddr=0002eabc vaddr=3ffb0000 size=0155ch (  5468) load[0m
+[0;32mI (147) esp_image: segment 2: paddr=00030020 vaddr=400d0020 size=7b24ch (504396) map[0m
+[0;32mI (333) esp_image: segment 3: paddr=000ab274 vaddr=3ffb155c size=01de0h (  7648) load[0m
+[0;32mI (336) esp_image: segment 4: paddr=000ad05c vaddr=40080000 size=14e34h ( 85556) load[0m
+[0;32mI (384) boot: Loaded app from partition at offset 0x10000[0m
+[0;32mI (384) boot: Disabling RNG early entropy source...[0m
+[0;32mI (395) cpu_start: Multicore app[0m
+[0;32mI (396) cpu_start: Pro cpu up.[0m
+[0;32mI (396) cpu_start: Starting app cpu, entry point is 0x400812bc[0m
+[0;32mI (0) cpu_start: App cpu up.[0m
+[0;32mI (414) cpu_start: Pro cpu start user code[0m
+[0;32mI (414) cpu_start: cpu freq: 160000000 Hz[0m
+[0;32mI (414) cpu_start: Application information:[0m
+[0;32mI (419) cpu_start: Project name:     wifi_station[0m
+[0;32mI (424) cpu_start: App version:      1[0m
+[0;32mI (428) cpu_start: Compile time:     Mar 11 2025 11:28:08[0m
+[0;32mI (434) cpu_start: ELF file SHA256:  db05b91806aead42...[0m
+[0;32mI (440) cpu_start: ESP-IDF:          v5.0.3-dirty[0m
+[0;32mI (446) cpu_start: Min chip rev:     v0.0[0m
+[0;32mI (451) cpu_start: Max chip rev:     v3.99 [0m
+[0;32mI (455) cpu_start: Chip rev:         v1.0[0m
+[0;32mI (460) heap_init: Initializing. RAM available for dynamic allocation:[0m
+[0;32mI (467) heap_init: At 3FFAE6E0 len 00001920 (6 KiB): DRAM[0m
+[0;32mI (473) heap_init: At 3FFB7000 len 00029000 (164 KiB): DRAM[0m
+[0;32mI (480) heap_init: At 3FFE0440 len 00003AE0 (14 KiB): D/IRAM[0m
+[0;32mI (486) heap_init: At 3FFE4350 len 0001BCB0 (111 KiB): D/IRAM[0m
+[0;32mI (492) heap_init: At 40094E34 len 0000B1CC (44 KiB): IRAM[0m
+[0;32mI (500) spi_flash: detected chip: generic[0m
+[0;32mI (503) spi_flash: flash io: dio[0m
+[0;33mW (507) spi_flash: Detected size(4096k) larger than the size in the binary image header(2048k). Using the size in the binary image header.[0m
+[0;33mW (521) ADC: legacy driver is deprecated, please migrate to `esp_adc/adc_oneshot.h`[0m
+[0;32mI (529) cpu_start: Starting scheduler on PRO CPU.[0m
+[0;32mI (0) cpu_start: Starting scheduler on APP CPU.[0m
+[0;32mI (620) wifi station: ESP_WIFI_MODE_STA[0m
+I (630) wifi:wifi driver task: 3ffbf048, prio:23, stack:6656, core=0
+[0;32mI (630) system_api: Base MAC address is not set[0m
+[0;32mI (630) system_api: read default base MAC address from EFUSE[0m
+I (660) wifi:wifi firmware version: 15fc0ca
+I (660) wifi:wifi certification version: v7.0
+I (660) wifi:config NVS flash: enabled
+I (660) wifi:config nano formating: disabled
+I (660) wifi:Init data frame dynamic rx buffer num: 32
+I (670) wifi:Init management frame dynamic rx buffer num: 32
+I (670) wifi:Init management short buffer num: 32
+I (670) wifi:Init dynamic tx buffer num: 32
+I (680) wifi:Init static rx buffer size: 1600
+I (680) wifi:Init static rx buffer num: 10
+I (690) wifi:Init dynamic rx buffer num: 32
+[0;32mI (690) wifi_init: rx ba win: 6[0m
+[0;32mI (690) wifi_init: tcpip mbox: 32[0m
+[0;32mI (700) wifi_init: udp mbox: 6[0m
+[0;32mI (700) wifi_init: tcp mbox: 6[0m
+[0;32mI (710) wifi_init: tcp tx win: 5744[0m
+[0;32mI (710) wifi_init: tcp rx win: 5744[0m
+[0;32mI (710) wifi_init: tcp mss: 1440[0m
+[0;32mI (720) wifi_init: WiFi IRAM OP enabled[0m
+[0;32mI (720) wifi_init: WiFi RX IRAM OP enabled[0m
+[0;32mI (800) phy_init: phy_version 4670,719f9f6,Feb 18 2021,17:07:07[0m
+I (900) wifi:mode : sta (3c:71:bf:14:e6:c4)
+I (900) wifi:enable tsf
+[0;32mI (900) wifi station: wifi_init_sta finished.[0m
+I (920) wifi:new:<9,0>, old:<1,0>, ap:<255,255>, sta:<9,0>, prof:1
+I (1610) wifi:state: init -> auth (b0)
+I (1620) wifi:state: auth -> init (8a0)
+I (1620) wifi:new:<9,0>, old:<9,0>, ap:<255,255>, sta:<9,0>, prof:1
+[0;32mI (1620) wifi station: retry to connect to the AP[0m
+[0;32mI (1620) wifi station: connect to the AP fail[0m
+[0;32mI (4030) wifi station: retry to connect to the AP[0m
+[0;32mI (4030) wifi station: connect to the AP fail[0m
+I (4040) wifi:new:<9,0>, old:<9,0>, ap:<255,255>, sta:<9,0>, prof:1
+I (4040) wifi:state: init -> auth (b0)
+I (4050) wifi:state: auth -> assoc (0)
+I (4060) wifi:state: assoc -> run (10)
+I (4070) wifi:connected with TP-Link_AA24, aid = 2, channel 9, BW20, bssid = 54:af:97:10:e0:5b
+I (4070) wifi:security: WPA2-PSK, phy: bgn, rssi: -43
+I (4090) wifi:pm start, type: 1
+
+I (4100) wifi:<ba-add>idx:0 (ifx:0, 54:af:97:10:e0:5b), tid:7, ssn:0, winSize:64
+I (4110) wifi:AP's beacon interval = 102400 us, DTIM period = 1
+[0;32mI (5090) esp_netif_handlers: sta ip: 192.168.0.158, mask: 255.255.255.0, gw: 192.168.0.1[0m
+[0;32mI (5090) wifi station: got ip:192.168.0.158[0m
+[0;32mI (5090) wifi station: connected to ap SSID:TP-Link_AA24 password:lab237237[0m
+[0;32mI (5100) wifi station: Socket created, connecting to 192.168.0.114:1234[0m
+I (5110) wifi:<ba-add>idx:1 (ifx:0, 54:af:97:10:e0:5b), tid:0, ssn:0, winSize:64
+[0;32mI (5120) wifi station: Successfully connected[0m
+[0;32mI (5140) wifi station: Data sent[0m
+[0;32mI (5160) wifi station: Data sent[0m
+[0;32mI (5180) wifi station: Data sent[0m
+[0;32mI (5200) wifi station: Data sent[0m
+[0;32mI (5220) wifi station: Data sent[0m
+[0;32mI (5240) wifi station: Data sent[0m
+[0;32mI (5260) wifi station: Data sent[0m
+[0;32mI (5280) wifi station: Data sent[0m
+[0;32mI (5300) wifi station: Data sent[0m
+[0;32mI (5320) wifi station: Data sent[0m
+[0;32mI (5340) wifi station: Data sent[0m
+[0;32mI (5360) wifi station: Data sent[0m
+[0;32mI (5370) wifi station: Data sent[0m
+[0;32mI (5390) wifi station: Data sent[0m
+[0;32mI (5410) wifi station: Data sent[0m
+[0;32mI (5430) wifi station: Data sent[0m
+[0;32mI (5450) wifi station: Data sent[0m
+[0;32mI (5470) wifi station: Data sent[0m
+[0;32mI (5490) wifi station: Data sent[0m
+[0;32mI (5510) wifi station: Data sent[0m
+[0;32mI (5530) wifi station: Data sent[0m
+[0;32mI (5550) wifi station: Data sent[0m
+[0;32mI (5570) wifi station: Data sent[0m
+[0;32mI (5590) wifi station: Data sent[0m
+[0;32mI (5600) wifi station: Data sent[0m
+[0;32mI (5620) wifi station: Data sent[0m
+[0;32mI (5640) wifi station: Data sent[0m
+[0;32mI (5660) wifi station: Data sent[0m
+[0;32mI (5680) wifi station: Data sent[0m
+[0;32mI (5700) wifi station: Data sent[0m
+[0;32mI (5720) wifi station: Data sent[0m
+[0;32mI (5740) wifi station: Data sent[0m
+[0;32mI (5760) wifi station: Data sent[0m
+[0;32mI (5780) wifi station: Data sent[0m
+[0;32mI (5800) wifi station: Data sent[0m
+[0;32mI (5810) wifi station: Data sent[0m
+[0;32mI (5830) wifi station: Data sent[0m
+[0;32mI (5850) wifi station: Data sent[0m
+[0;32mI (5870) wifi station: Data sent[0m
+[0;32mI (5890) wifi station: Data sent[0m
+[0;32mI (5910) wifi station: Data sent[0m
+[0;32mI (5930) wifi station: Data sent[0m
+[0;32mI (5950) wifi station: Data sent[0m
+[0;32mI (5970) wifi station: Data sent[0m
+[0;32mI (5990) wifi station: Data sent[0m
+[0;32mI (6010) wifi station: Data sent[0m
+[0;32mI (6030) wifi station: Data sent[0m
+[0;32mI (6050) wifi station: Data sent[0m
+[0;32mI (6060) wifi station: Data sent[0m
+[0;32mI (6080) wifi station: Data sent[0m
+[0;32mI (6100) wifi station: Data sent[0m
+[0;32mI (6120) wifi station: Data sent[0m
+[0;32mI (6140) wifi station: Data sent[0m
+[0;32mI (6160) wifi station: Data sent[0m
+[0;32mI (6180) wifi station: Data sent[0m
+[0;32mI (6200) wifi station: Data sent[0m
+[0;32mI (6220) wifi station: Data sent[0m
+[0;32mI (6240) wifi station: Data sent[0m
+[0;32mI (6260) wifi station: Data sent[0m
+[0;32mI (6280) wifi station: Data sent[0m
+[0;32mI (6300) wifi station: Data sent[0m
+[0;32mI (6310) wifi station: Data sent[0m
+[0;32mI (6330) wifi station: Data sent[0m
+[0;32mI (6350) wifi station: Data sent[0m
+[0;32mI (6370) wifi station: Data sent[0m
+[0;32mI (6390) wifi station: Data sent[0m
+[0;32mI (6410) wifi station: Data sent[0m
+[0;32mI (6430) wifi station: Data sent[0m
+[0;32mI (6450) wifi station: Data sent[0m
+[0;32mI (6470) wifi station: Data sent[0m
+[0;32mI (6490) wifi station: Data sent[0m
+[0;32mI (6510) wifi station: Data sent[0m
+[0;32mI (6530) wifi station: Data sent[0m
+[0;32mI (6550) wifi station: Data sent[0m
+[0;32mI (6560) wifi station: Data sent[0m
+[0;32mI (6590) wifi station: Data sent[0m
+[0;32mI (6600) wifi station: Data sent[0m
+[0;32mI (6620) wifi station: Data sent[0m
+[0;32mI (6640) wifi station: Data sent[0m
+[0;32mI (6660) wifi station: Data sent[0m
+[0;32mI (6680) wifi station: Data sent[0m
+[0;32mI (6700) wifi station: Data sent[0m
+[0;32mI (6720) wifi station: Data sent[0m
+[0;32mI (6740) wifi station: Data sent[0m
+[0;32mI (6760) wifi station: Data sent[0m
+[0;32mI (6780) wifi station: Data sent[0m
+[0;32mI (6800) wifi station: Data sent[0m
+[0;32mI (6820) wifi station: Data sent[0m
+[0;32mI (6840) wifi station: Data sent[0m
+[0;32mI (6850) wifi station: Data sent[0m
+[0;32mI (6870) wifi station: Data sent[0m
+[0;32mI (6890) wifi station: Data sent[0m
+[0;32mI (6910) wifi station: Data sent[0m
+[0;32mI (6930) wifi station: Data sent[0m
+[0;32mI (6950) wifi station: Data sent[0m
+[0;32mI (6970) wifi station: Data sent[0m
+[0;32mI (6990) wifi station: Data sent[0m
+[0;32mI (7010) wifi station: Data sent[0m
+[0;32mI (7030) wifi station: Data sent[0m
+[0;32mI (7050) wifi station: Data sent[0m
+[0;32mI (7070) wifi station: Data sent[0m
+[0;32mI (7080) wifi station: Data sent[0m
+[0;32mI (7100) wifi station: Data sent[0m
+[0;32mI (7120) wifi station: Data sent[0m
+[0;32mI (7140) wifi station: Data sent[0m
+[0;32mI (7160) wifi station: Data sent[0m
+[0;32mI (7180) wifi station: Data sent[0m
+[0;32mI (7200) wifi station: Data sent[0m
+[0;32mI (7220) wifi station: Data sent[0m
+[0;32mI (7240) wifi station: Data sent[0m
+[0;32mI (7260) wifi station: Data sent[0m
+[0;32mI (7280) wifi station: Data sent[0m
+[0;32mI (7300) wifi station: Data sent[0m
+[0;32mI (7320) wifi station: Data sent[0m
+[0;32mI (7340) wifi station: Data sent[0m
+[0;32mI (7350) wifi station: Data sent[0m
+[0;32mI (7370) wifi station: Data sent[0m
+[0;32mI (7390) wifi station: Data sent[0m
+[0;32mI (7410) wifi station: Data sent[0m
+[0;32mI (7430) wifi station: Data sent[0m
+[0;32mI (7450) wifi station: Data sent[0m
+[0;32mI (7470) wifi station: Data sent[0m
+[0;32mI (7490) wifi station: Data sent[0m
+[0;32mI (7510) wifi station: Data sent[0m
+[0;32mI (7530) wifi station: Data sent[0m
+[0;32mI (7550) wifi station: Data sent[0m
+[0;32mI (7570) wifi station: Data sent[0m
+[0;32mI (7590) wifi station: Data sent[0m
+[0;32mI (7600) wifi station: Data sent[0m
+[0;32mI (7620) wifi station: Data sent[0m
+[0;32mI (7640) wifi station: Data sent[0m
+[0;32mI (7660) wifi station: Data sent[0m
+[0;32mI (7680) wifi station: Data sent[0m
+[0;32mI (7700) wifi station: Data sent[0m
+[0;32mI (7720) wifi station: Data sent[0m
+[0;32mI (7740) wifi station: Data sent[0m
+[0;32mI (7760) wifi station: Data sent[0m
+[0;32mI (7780) wifi station: Data sent[0m
+[0;32mI (7800) wifi station: Data sent[0m
+[0;32mI (7820) wifi station: Data sent[0m
+[0;32mI (7840) wifi station: Data sent[0m
+[0;32mI (7850) wifi station: Data sent[0m
+[0;32mI (7870) wifi station: Data sent[0m
+[0;32mI (7890) wifi station: Data sent[0m
+[0;32mI (7910) wifi station: Data sent[0m
+[0;32mI (7930) wifi station: Data sent[0m
+[0;32mI (7950) wifi station: Data sent[0m
+[0;32mI (7970) wifi station: Data sent[0m
+[0;32mI (7990) wifi station: Data sent[0m
+[0;32mI (8010) wifi station: Data sent[0m
+[0;32mI (8030) wifi station: Data sent[0m
+[0;32mI (8050) wifi station: Data sent[0m
+[0;32mI (8060) wifi station: Data sent[0m
+[0;32mI (8080) wifi station: Data sent[0m
+[0;32mI (8100) wifi station: Data sent[0m
+[0;32mI (8120) wifi station: Data sent[0m
+[0;32mI (8140) wifi station: Data sent[0m
+[0;32mI (8160) wifi station: Data sent[0m
+[0;32mI (8180) wifi station: Data sent[0m
+[0;32mI (8200) wifi station: Data sent[0m
+[0;32mI (8220) wifi station: Data sent[0m
+[0;32mI (8240) wifi station: Data sent[0m
+[0;32mI (8260) wifi station: Data sent[0m
+[0;32mI (8280) wifi station: Data sent[0m
+[0;32mI (8300) wifi station: Data sent[0m
+[0;32mI (8320) wifi station: Data sent[0m
+[0;32mI (8340) wifi station: Data sent[0m
+[0;32mI (8350) wifi station: Data sent[0m
+[0;32mI (8370) wifi station: Data sent[0m
+[0;32mI (8390) wifi station: Data sent[0m
+[0;32mI (8410) wifi station: Data sent[0m
+[0;32mI (8430) wifi station: Data sent[0m
+[0;32mI (8450) wifi station: Data sent[0m
+[0;32mI (8470) wifi station: Data sent[0m
+[0;32mI (8490) wifi station: Data sent[0m
+[0;32mI (8510) wifi station: Data sent[0m
+[0;32mI (8530) wifi station: Data sent[0m
+[0;32mI (8550) wifi station: Data sent[0m
+[0;32mI (8570) wifi station: Data sent[0m
+[0;32mI (8590) wifi station: Data sent[0m
+[0;32mI (8610) wifi station: Data sent[0m
+[0;32mI (8620) wifi station: Data sent[0m
+[0;32mI (8640) wifi station: Data sent[0m
+[0;32mI (8660) wifi station: Data sent[0m
+[0;32mI (8680) wifi station: Data sent[0m
+[0;32mI (8700) wifi station: Data sent[0m
+[0;32mI (8720) wifi station: Data sent[0m
+[0;32mI (8740) wifi station: Data sent[0m
+[0;32mI (8760) wifi station: Data sent[0m
+[0;32mI (8780) wifi station: Data sent[0m
+[0;32mI (8800) wifi station: Data sent[0m
+[0;32mI (8820) wifi station: Data sent[0m
+[0;32mI (8840) wifi station: Data sent[0m
+[0;32mI (8860) wifi station: Data sent[0m
+[0;32mI (8880) wifi station: Data sent[0m
+[0;32mI (8900) wifi station: Data sent[0m
+[0;32mI (8910) wifi station: Data sent[0m
+[0;32mI (8930) wifi station: Data sent[0m
+[0;32mI (8950) wifi station: Data sent[0m
+[0;32mI (8970) wifi station: Data sent[0m
+[0;32mI (8990) wifi station: Data sent[0m
+[0;32mI (9010) wifi station: Data sent[0m
+[0;32mI (9030) wifi station: Data sent[0m
+[0;32mI (9050) wifi station: Data sent[0m
+[0;32mI (9070) wifi station: Data sent[0m
+[0;32mI (9090) wifi station: Data sent[0m
+[0;32mI (9110) wifi station: Data sent[0m
+[0;32mI (9130) wifi station: Data sent[0m
+[0;32mI (9150) wifi station: Data sent[0m
+[0;32mI (9160) wifi station: Data sent[0m
+[0;32mI (9180) wifi station: Data sent[0m
+[0;32mI (9200) wifi station: Data sent[0m
+[0;32mI (9220) wifi station: Data sent[0m
+[0;32mI (9240) wifi station: Data sent[0m
+[0;32mI (9260) wifi station: Data sent[0m
+[0;32mI (9280) wifi station: Data sent[0m
+[0;32mI (9300) wifi station: Data sent[0m
+[0;32mI (9320) wifi station: Data sent[0m
+[0;32mI (9340) wifi station: Data sent[0m
+[0;32mI (9360) wifi station: Data sent[0m
+[0;32mI (9380) wifi station: Data sent[0m
+[0;32mI (9400) wifi station: Data sent[0m
+[0;32mI (9420) wifi station: Data sent[0m
+[0;32mI (9430) wifi station: Data sent[0m
+[0;32mI (9450) wifi station: Data sent[0m
+[0;32mI (9470) wifi station: Data sent[0m
+[0;32mI (9490) wifi station: Data sent[0m
+[0;32mI (9510) wifi station: Data sent[0m
+[0;32mI (9530) wifi station: Data sent[0m
+[0;32mI (9550) wifi station: Data sent[0m
+[0;32mI (9570) wifi station: Data sent[0m
+[0;32mI (9590) wifi station: Data sent[0m
+[0;32mI (9610) wifi station: Data sent[0m
+[0;32mI (9630) wifi station: Data sent[0m
+[0;32mI (9650) wifi station: Data sent[0m
+[0;32mI (9670) wifi station: Data sent[0m
+[0;32mI (9690) wifi station: Data sent[0m
+[0;32mI (9700) wifi station: Data sent[0m
+[0;32mI (9720) wifi station: Data sent[0m
+[0;32mI (9740) wifi station: Data sent[0m
+[0;32mI (9760) wifi station: Data sent[0m
+[0;32mI (9780) wifi station: Data sent[0m
+[0;32mI (9800) wifi station: Data sent[0m
+[0;32mI (9820) wifi station: Data sent[0m
+[0;32mI (9840) wifi station: Data sent[0m
+[0;32mI (9860) wifi station: Data sent[0m
+[0;32mI (9880) wifi station: Data sent[0m
+[0;32mI (9900) wifi station: Data sent[0m
+[0;32mI (9920) wifi station: Data sent[0m
+[0;32mI (9940) wifi station: Data sent[0m
+[0;32mI (9960) wifi station: Data sent[0m
+[0;32mI (9980) wifi station: Data sent[0m
+[0;32mI (10000) wifi station: Data sent[0m
+[0;32mI (10010) wifi station: Data sent[0m
+[0;32mI (10030) wifi station: Data sent[0m
+[0;32mI (10050) wifi station: Data sent[0m
+[0;32mI (10070) wifi station: Data sent[0m
+[0;32mI (10090) wifi station: Data sent[0m
+[0;32mI (10110) wifi station: Data sent[0m
+[0;32mI (10130) wifi station: Data sent[0m
+[0;32mI (10150) wifi station: Data sent[0m
+[0;32mI (10170) wifi station: Data sent[0m
+[0;32mI (10190) wifi station: Data sent[0m
+[0;32mI (10210) wifi station: Data sent[0m
+[0;32mI (10230) wifi station: Data sent[0m
+[0;32mI (10250) wifi station: Data sent[0m
+[0;32mI (10270) wifi station: Data sent[0m
+[0;32mI (10290) wifi station: Data sent[0m
+[0;32mI (10310) wifi station: Data sent[0m
+[0;32mI (10330) wifi station: Data sent[0m
+[0;32mI (10340) wifi station: Data sent[0m
+[0;31mE (10350) task_wdt: Task watchdog got triggered. The following tasks/users did not reset the watchdog in time:[0m
+[0;31mE (10350) task_wdt:  - IDLE (CPU 1)[0m
+[0;31mE (10350) task_wdt: Tasks currently running:[0m
+[0;31mE (10350) task_wdt: CPU 0: IDLE[0m
+[0;31mE (10350) task_wdt: CPU 1: tcp_client[0m
+[0;31mE (10350) task_wdt: Print CPU 1 backtrace[0m
+
+
+Backtrace: 0x4008511A:0x3FFB2080 0x40082CC9:0x3FFB20A0 0x400D679A:0x3FFC55D0 0x400D6F5F:0x3FFC5600 0x400D5E1F:0x3FFC5620 0x400D59EA:0x3FFC5640 0x4000BD83:0x3FFC5660 0x4000117D:0x3FFC5680 0x400592FE:0x3FFC56A0 0x4005937A:0x3FFC56C0 0x40137C0B:0x3FFC56E0 0x401432FF:0x3FFC5710 0x4013ECA2:0x3FFC5730 0x4013EE1D:0x3FFC5A40 0x40149D49:0x3FFC5A70 0x4008E01D:0x3FFC5AA0 0x400D7291:0x3FFC5AF0 0x4008BDE9:0x3FFC6080
+
+[0;32mI (10350) wifi station: Data sent[0m
+[0;32mI (10440) wifi station: Data sent[0m
+[0;32mI (10460) wifi station: Data sent[0m
+[0;32mI (10470) wifi station: Data sent[0m
+[0;32mI (10490) wifi station: Data sent[0m
+[0;32mI (10510) wifi station: Data sent[0m
+[0;32mI (10530) wifi station: Data sent[0m
+[0;32mI (10550) wifi station: Data sent[0m
+[0;32mI (10570) wifi station: Data sent[0m
+[0;32mI (10590) wifi station: Data sent[0m
+[0;32mI (10610) wifi station: Data sent[0m
+[0;32mI (10630) wifi station: Data sent[0m
+[0;32mI (10650) wifi station: Data sent[0m
+[0;32mI (10670) wifi station: Data sent[0m
+[0;32mI (10690) wifi station: Data sent[0m
+[0;32mI (10710) wifi station: Data sent[0m
+[0;32mI (10720) wifi station: Data sent[0m
+[0;32mI (10740) wifi station: Data sent[0m
+[0;32mI (10760) wifi station: Data sent[0m
+[0;32mI (10780) wifi station: Data sent[0m
+[0;32mI (10800) wifi station: Data sent[0m
+[0;32mI (10820) wifi station: Data sent[0m
+[0;32mI (10840) wifi station: Data sent[0m
+[0;32mI (10860) wifi station: Data sent[0m
+[0;32mI (10880) wifi station: Data sent[0m
+[0;32mI (10900) wifi station: Data sent[0m
+[0;32mI (10920) wifi station: Data sent[0m
+[0;32mI (10940) wifi station: Data sent[0m
+[0;32mI (10960) wifi station: Data sent[0m
+[0;32mI (10970) wifi station: Data sent[0m
+[0;32mI (10990) wifi station: Data sent[0m
+[0;32mI (11010) wifi station: Data sent[0m
+[0;32mI (11030) wifi station: Data sent[0m
+[0;32mI (11050) wifi station: Data sent[0m
+[0;32mI (11070) wifi station: Data sent[0m
+[0;32mI (11090) wifi station: Data sent[0m
+[0;32mI (11110) wifi station: Data sent[0m
+[0;32mI (11130) wifi station: Data sent[0m
+[0;32mI (11150) wifi station: Data sent[0m
+[0;32mI (11170) wifi station: Data sent[0m
+[0;32mI (11190) wifi station: Data sent[0m
+[0;32mI (11210) wifi station: Data sent[0m
+[0;32mI (11230) wifi station: Data sent[0m
+[0;32mI (11250) wifi station: Data sent[0m
+[0;32mI (11270) wifi station: Data sent[0m
+[0;32mI (11290) wifi station: Data sent[0m
+[0;32mI (11300) wifi station: Data sent[0m
+[0;32mI (11320) wifi station: Data sent[0m
+[0;32mI (11340) wifi station: Data sent[0m
+[0;32mI (11360) wifi station: Data sent[0m
+[0;32mI (11380) wifi station: Data sent[0m
+[0;32mI (11400) wifi station: Data sent[0m
+[0;32mI (11420) wifi station: Data sent[0m
+[0;32mI (11440) wifi station: Data sent[0m
+[0;32mI (11460) wifi station: Data sent[0m
+[0;32mI (11480) wifi station: Data sent[0m
+[0;32mI (11500) wifi station: Data sent[0m
+[0;32mI (11510) wifi station: Data sent[0m
+[0;32mI (11530) wifi station: Data sent[0m
+[0;32mI (11550) wifi station: Data sent[0m
+[0;32mI (11570) wifi station: Data sent[0m
+[0;32mI (11590) wifi station: Data sent[0m
+[0;32mI (11610) wifi station: Data sent[0m
+[0;32mI (11630) wifi station: Data sent[0m
+[0;32mI (11650) wifi station: Data sent[0m
+[0;32mI (11670) wifi station: Data sent[0m
+[0;32mI (11690) wifi station: Data sent[0m
+[0;32mI (11710) wifi station: Data sent[0m
+[0;32mI (11730) wifi station: Data sent[0m
+[0;32mI (11750) wifi station: Data sent[0m
+[0;32mI (11770) wifi station: Data sent[0m
+[0;32mI (11780) wifi station: Data sent[0m
+[0;32mI (11800) wifi station: Data sent[0m
+[0;32mI (11820) wifi station: Data sent[0m
+[0;32mI (11840) wifi station: Data sent[0m
+[0;32mI (11860) wifi station: Data sent[0m
+[0;32mI (11880) wifi station: Data sent[0m
+[0;32mI (11900) wifi station: Data sent[0m
+[0;32mI (11920) wifi station: Data sent[0m
+[0;32mI (11940) wifi station: Data sent[0m
+[0;32mI (11960) wifi station: Data sent[0m
+[0;32mI (11980) wifi station: Data sent[0m
+[0;32mI (12000) wifi station: Data sent[0m
+[0;32mI (12010) wifi station: Data sent[0m
+[0;32mI (12030) wifi station: Data sent[0m
+[0;32mI (12050) wifi station: Data sent[0m
+[0;32mI (12070) wifi station: Data sent[0m
+[0;32mI (12090) wifi station: Data sent[0m
+[0;32mI (12110) wifi station: Data sent[0m
+[0;32mI (12130) wifi station: Data sent[0m
+[0;32mI (12150) wifi station: Data sent[0m
+[0;32mI (12170) wifi station: Data sent[0m
+[0;32mI (12190) wifi station: Data sent[0m
+[0;32mI (12210) wifi station: Data sent[0m
+[0;32mI (12230) wifi station: Data sent[0m
+[0;32mI (12240) wifi station: Data sent[0m
+[0;32mI (12260) wifi station: Data sent[0m
+[0;32mI (12280) wifi station: Data sent[0m
+[0;32mI (12300) wifi station: Data sent[0m
+[0;32mI (12320) wifi station: Data sent[0m
+[0;32mI (12340) wifi station: Data sent[0m
+[0;32mI (12360) wifi station: Data sent[0m
+[0;32mI (12380) wifi station: Data sent[0m
+[0;32mI (12400) wifi station: Data sent[0m
+[0;32mI (12420) wifi station: Data sent[0m
+[0;32mI (12440) wifi station: Data sent[0m
+[0;32mI (12460) wifi station: Data sent[0m
+[0;32mI (12480) wifi station: Data sent[0m
+[0;32mI (12500) wifi station: Data sent[0m
+[0;32mI (12520) wifi station: Data sent[0m
+[0;32mI (12540) wifi station: Data sent[0m
+[0;32mI (12550) wifi station: Data sent[0m
+[0;32mI (12570) wifi station: Data sent[0m
+[0;32mI (12590) wifi station: Data sent[0m
+[0;32mI (12610) wifi station: Data sent[0m
+[0;32mI (12630) wifi station: Data sent[0m
+[0;32mI (12650) wifi station: Data sent[0m
+[0;32mI (12670) wifi station: Data sent[0m
+[0;32mI (12690) wifi station: Data sent[0m
+[0;32mI (12710) wifi station: Data sent[0m
+[0;32mI (12730) wifi station: Data sent[0m
+[0;32mI (12750) wifi station: Data sent[0m
+[0;32mI (12770) wifi station: Data sent[0m
+[0;32mI (12790) wifi station: Data sent[0m
+[0;32mI (12810) wifi station: Data sent[0m
+[0;32mI (12830) wifi station: Data sent[0m
+[0;32mI (12850) wifi station: Data sent[0m
+[0;32mI (12870) wifi station: Data sent[0m
+[0;32mI (12890) wifi station: Data sent[0m
+[0;32mI (12900) wifi station: Data sent[0m
+[0;32mI (12920) wifi station: Data sent[0m
+[0;32mI (12940) wifi station: Data sent[0m
+[0;32mI (12960) wifi station: Data sent[0m
+[0;32mI (12980) wifi station: Data sent[0m
+[0;32mI (13000) wifi station: Data sent[0m
+[0;32mI (13020) wifi station: Data sent[0m
+[0;32mI (13040) wifi station: Data sent[0m
+[0;32mI (13060) wifi station: Data sent[0m
+[0;32mI (13080) wifi station: Data sent[0m
+[0;32mI (13100) wifi station: Data sent[0m
+[0;32mI (13120) wifi station: Data sent[0m
+[0;32mI (13140) wifi station: Data sent[0m
+[0;32mI (13160) wifi station: Data sent[0m
+[0;32mI (13180) wifi station: Data sent[0m
+[0;32mI (13200) wifi station: Data sent[0m
+[0;32mI (13210) wifi station: Data sent[0m
+[0;32mI (13230) wifi station: Data sent[0m
+[0;32mI (13250) wifi station: Data sent[0m
+[0;32mI (13270) wifi station: Data sent[0m
+[0;32mI (13290) wifi station: Data sent[0m
+[0;32mI (13310) wifi station: Data sent[0m
+[0;32mI (13330) wifi station: Data sent[0m
+[0;32mI (13350) wifi station: Data sent[0m
+[0;32mI (13370) wifi station: Data sent[0m
+[0;32mI (13390) wifi station: Data sent[0m
+[0;32mI (13410) wifi station: Data sent[0m
+[0;32mI (13430) wifi station: Data sent[0m
+[0;32mI (13450) wifi station: Data sent[0m
+[0;32mI (13470) wifi station: Data sent[0m
+[0;32mI (13480) wifi station: Data sent[0m
+[0;32mI (13500) wifi station: Data sent[0m
+[0;32mI (13520) wifi station: Data sent[0m
+[0;32mI (13540) wifi station: Data sent[0m
+[0;32mI (13560) wifi station: Data sent[0m
+[0;32mI (13580) wifi station: Data sent[0m
+[0;32mI (13600) wifi station: Data sent[0m
+[0;32mI (13620) wifi station: Data sent[0m
+[0;32mI (13640) wifi station: Data sent[0m
+[0;32mI (13660) wifi station: Data sent[0m
+[0;32mI (13680) wifi station: Data sent[0m
+[0;32mI (13700) wifi station: Data sent[0m
+[0;32mI (13720) wifi station: Data sent[0m
+[0;32mI (13740) wifi station: Data sent[0m
+[0;32mI (13760) wifi station: Data sent[0m
+[0;32mI (13780) wifi station: Data sent[0m
+[0;32mI (13800) wifi station: Data sent[0m
+[0;32mI (13810) wifi station: Data sent[0m
+[0;32mI (13830) wifi station: Data sent[0m
+[0;32mI (13850) wifi station: Data sent[0m
+[0;32mI (13870) wifi station: Data sent[0m
+[0;32mI (13890) wifi station: Data sent[0m
+[0;32mI (13910) wifi station: Data sent[0m
+[0;32mI (13930) wifi station: Data sent[0m
+[0;32mI (13950) wifi station: Data sent[0m
+[0;32mI (13970) wifi station: Data sent[0m
+[0;32mI (13990) wifi station: Data sent[0m
+[0;32mI (14010) wifi station: Data sent[0m
+[0;32mI (14030) wifi station: Data sent[0m
+[0;32mI (14050) wifi station: Data sent[0m
+[0;32mI (14070) wifi station: Data sent[0m
+[0;32mI (14090) wifi station: Data sent[0m
+[0;32mI (14110) wifi station: Data sent[0m
+[0;32mI (14130) wifi station: Data sent[0m
+[0;32mI (14140) wifi station: Data sent[0m
+[0;32mI (14160) wifi station: Data sent[0m
+[0;32mI (14180) wifi station: Data sent[0m
+[0;32mI (14200) wifi station: Data sent[0m
+[0;32mI (14220) wifi station: Data sent[0m

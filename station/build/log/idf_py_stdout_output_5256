@@ -1,0 +1,67 @@
+[1/5] cmd.exe /C "cd /D D:\2025-Spring-Cornell-Research\Hardware_Projects\station\build\esp-idf\esptool_py && C:\Espressif\python_env\idf5.0_py3.11_env\Scripts\python.exe C:/Espressif/frameworks/esp-idf-v5.0.3/components/partition_table/check_sizes.py --offset 0x8000 partition --type app D:/2025-Spring-Cornell-Research/Hardware_Projects/station/build/partition_table/partition-table.bin D:/2025-Spring-Cornell-Research/Hardware_Projects/station/build/wifi_station.bin"
+wifi_station.bin binary size 0xb3380 bytes. Smallest app partition is 0x100000 bytes. 0x4cc80 bytes (30%) free.
+[2/5] Performing build step for 'bootloader'
+[1/1] cmd.exe /C "cd /D D:\2025-Spring-Cornell-Research\Hardware_Projects\station\build\bootloader\esp-idf\esptool_py && C:\Espressif\python_env\idf5.0_py3.11_env\Scripts\python.exe C:/Espressif/frameworks/esp-idf-v5.0.3/components/partition_table/check_sizes.py --offset 0x8000 bootloader 0x1000 D:/2025-Spring-Cornell-Research/Hardware_Projects/station/build/bootloader/bootloader.bin"
+Bootloader binary size 0x6760 bytes. 0x8a0 bytes (8%) free.
+[2/3] cmd.exe /C "cd /D C:\Espressif\frameworks\esp-idf-v5.0.3\components\esptool_py && C:\Espressif\tools\cmake\3.24.0\bin\cmake.exe -D IDF_PATH=C:/Espressif/frameworks/esp-idf-v5.0.3 -D SERIAL_TOOL=C:/Espressif/python_env/idf5.0_py3.11_env/Scripts/python.exe;;C:/Espressif/frameworks/esp-idf-v5.0.3/components/esptool_py/esptool/esptool.py;--chip;esp32 -D SERIAL_TOOL_ARGS=--before=default_reset;--after=hard_reset;write_flash;@flash_args -D WORKING_DIRECTORY=D:/2025-Spring-Cornell-Research/Hardware_Projects/station/build -P C:/Espressif/frameworks/esp-idf-v5.0.3/components/esptool_py/run_serial_tool.cmake"
+esptool esp32 -p COM20 -b 460800 --before=default_reset --after=hard_reset write_flash --flash_mode dio --flash_freq 40m --flash_size 2MB 0x1000 bootloader/bootloader.bin 0x10000 wifi_station.bin 0x8000 partition_table/partition-table.bin
+esptool.py v4.5.1
+Serial port COM20
+Connecting..........
+Chip is ESP32-D0WDQ6 (revision v1.0)
+Features: WiFi, BT, Dual Core, 240MHz, VRef calibration in efuse, Coding Scheme None
+Crystal is 40MHz
+MAC: 3c:71:bf:14:e6:c4
+Uploading stub...
+Running stub...
+Stub running...
+Changing baud rate to 460800
+Changed.
+Configuring flash size...
+Flash will be erased from 0x00001000 to 0x00007fff...
+Flash will be erased from 0x00010000 to 0x000c3fff...
+Flash will be erased from 0x00008000 to 0x00008fff...
+Compressed 26464 bytes to 16485...
+Writing at 0x00001000... (50 %)
+Writing at 0x000076d3... (100 %)
+Wrote 26464 bytes (16485 compressed) at 0x00001000 in 0.8 seconds (effective 261.1 kbit/s)...
+Hash of data verified.
+Compressed 734080 bytes to 473339...
+Writing at 0x00010000... (3 %)
+Writing at 0x0001c309... (6 %)
+Writing at 0x000241ee... (10 %)
+Writing at 0x0002950b... (13 %)
+Writing at 0x00031dff... (17 %)
+Writing at 0x00037644... (20 %)
+Writing at 0x0003d1fb... (24 %)
+Writing at 0x000425fe... (27 %)
+Writing at 0x00047f78... (31 %)
+Writing at 0x0004d6d9... (34 %)
+Writing at 0x00052f44... (37 %)
+Writing at 0x00058e80... (41 %)
+Writing at 0x0005e645... (44 %)
+Writing at 0x00063846... (48 %)
+Writing at 0x00068c75... (51 %)
+Writing at 0x0006e042... (55 %)
+Writing at 0x000735ff... (58 %)
+Writing at 0x00078de3... (62 %)
+Writing at 0x0007ea03... (65 %)
+Writing at 0x00084108... (68 %)
+Writing at 0x00089bd6... (72 %)
+Writing at 0x0008fb58... (75 %)
+Writing at 0x00095465... (79 %)
+Writing at 0x0009b8c5... (82 %)
+Writing at 0x000a5afb... (86 %)
+Writing at 0x000abe37... (89 %)
+Writing at 0x000b337e... (93 %)
+Writing at 0x000b8ca8... (96 %)
+Writing at 0x000be52c... (100 %)
+Wrote 734080 bytes (473339 compressed) at 0x00010000 in 11.3 seconds (effective 520.9 kbit/s)...
+Hash of data verified.
+Compressed 3072 bytes to 103...
+Writing at 0x00008000... (100 %)
+Wrote 3072 bytes (103 compressed) at 0x00008000 in 0.1 seconds (effective 391.1 kbit/s)...
+Hash of data verified.
+
+Leaving...
+Hard resetting via RTS pin...

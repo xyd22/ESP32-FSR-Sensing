@@ -1,0 +1,83 @@
+[0;33m--- WARNING: GDB cannot open serial ports accessed as COMx[0m
+[0;33m--- Using \\.\COM20 instead...[0m
+[0;33m--- idf_monitor on \\.\COM20 115200 ---[0m
+[0;33m--- Quit: Ctrl+] | Menu: Ctrl+T | Help: Ctrl+T followed by Ctrl+H ---[0m
+[0;33m0x40080400: _init at ??:?
+[0m
+[0;33m0x400812bc: call_start_cpu1 at C:/Espressif/frameworks/esp-idf-v5.0.3/components/esp_system/port/cpu_start.c:143
+[0m
+[0;33m0x4008d5a4: block_absorb at C:/Espressif/frameworks/esp-idf-v5.0.3/components/heap/tlsf/tlsf.c:449
+ (inlined by) block_merge_next at C:/Espressif/frameworks/esp-idf-v5.0.3/components/heap/tlsf/tlsf.c:487
+ (inlined by) tlsf_free at C:/Espressif/frameworks/esp-idf-v5.0.3/components/heap/tlsf/tlsf.c:1122
+[0m
+[0;33m0x4008d5a8: block_size at C:/Espressif/frameworks/esp-idf-v5.0.3/components/heap/tlsf/tlsf_block_functions.h:20
+ (inlined by) block_absorb at C:/Espressif/frameworks/esp-idf-v5.0.3/components/heap/tlsf/tlsf.c:451
+ (inlined by) block_merge_next at C:/Espressif/frameworks/esp-idf-v5.0.3/components/heap/tlsf/tlsf.c:487
+ (inlined by) tlsf_free at C:/Espressif/frameworks/esp-idf-v5.0.3/components/heap/tlsf/tlsf.c:1122
+[0m
+[0;33m0x4008d5a5: block_absorb at C:/Espressif/frameworks/esp-idf-v5.0.3/components/heap/tlsf/tlsf.c:449
+ (inlined by) block_merge_next at C:/Espressif/frameworks/esp-idf-v5.0.3/components/heap/tlsf/tlsf.c:487
+ (inlined by) tlsf_free at C:/Espressif/frameworks/esp-idf-v5.0.3/components/heap/tlsf/tlsf.c:1122
+[0m
+[0;33m0x4008d1b0: multi_heap_free_impl at C:/Espressif/frameworks/esp-idf-v5.0.3/components/heap/multi_heap.c:231
+[0m
+[0;33m0x400822b2: heap_caps_free at C:/Espressif/frameworks/esp-idf-v5.0.3/components/heap/heap_caps.c:374
+[0m
+[0;33m0x4008f6c1: free at C:/Espressif/frameworks/esp-idf-v5.0.3/components/newlib/heap.c:39
+[0m
+[0;33m0x4009199e: esf_buf_recycle at ??:?
+[0m
+[0;33m0x40118282: ppRecycleRxPkt at ??:?
+[0m
+[0;33m0x40114f35: ic_ebuf_recycle_rx at ??:?
+[0m
+[0;33m0x4008f349: sta_input at ??:?
+[0m
+[0;33m0x4008f381: sta_rx_cb at ??:?
+[0m
+[0;33m0x400930d5: ppRxPkt at ??:?
+[0m
+[0;33m0x40090f4c: ppTask at ??:?
+[0m
+[0;33m0x4008bde9: vPortTaskWrapper at C:/Espressif/frameworks/esp-idf-v5.0.3/components/freertos/FreeRTOS-Kernel/portable/xtensa/port.c:154
+[0m
+[0;33m0x40080400: _init at ??:?
+[0m
+[0;33m0x400812bc: call_start_cpu1 at C:/Espressif/frameworks/esp-idf-v5.0.3/components/esp_system/port/cpu_start.c:143
+[0m
+[0;33m0x4008d5fc: tlsf_fls at C:/Espressif/frameworks/esp-idf-v5.0.3/components/heap/tlsf/tlsf.c:75
+ (inlined by) mapping_insert at C:/Espressif/frameworks/esp-idf-v5.0.3/components/heap/tlsf/tlsf.c:274
+ (inlined by) block_insert at C:/Espressif/frameworks/esp-idf-v5.0.3/components/heap/tlsf/tlsf.c:387
+ (inlined by) tlsf_free at C:/Espressif/frameworks/esp-idf-v5.0.3/components/heap/tlsf/tlsf.c:1123
+[0m
+[0;33m0x4008d601: tlsf_fls at C:/Espressif/frameworks/esp-idf-v5.0.3/components/heap/tlsf/tlsf.c:75
+ (inlined by) mapping_insert at C:/Espressif/frameworks/esp-idf-v5.0.3/components/heap/tlsf/tlsf.c:274
+ (inlined by) block_insert at C:/Espressif/frameworks/esp-idf-v5.0.3/components/heap/tlsf/tlsf.c:387
+ (inlined by) tlsf_free at C:/Espressif/frameworks/esp-idf-v5.0.3/components/heap/tlsf/tlsf.c:1123
+[0m
+[0;33m0x400f2848: queue_send_wrapper at C:/Espressif/frameworks/esp-idf-v5.0.3/components/esp_wifi/esp32/esp_adapter.c:407
+[0m
+[0;33m0x4008d5fe: tlsf_fls at C:/Espressif/frameworks/esp-idf-v5.0.3/components/heap/tlsf/tlsf.c:75
+ (inlined by) mapping_insert at C:/Espressif/frameworks/esp-idf-v5.0.3/components/heap/tlsf/tlsf.c:274
+ (inlined by) block_insert at C:/Espressif/frameworks/esp-idf-v5.0.3/components/heap/tlsf/tlsf.c:387
+ (inlined by) tlsf_free at C:/Espressif/frameworks/esp-idf-v5.0.3/components/heap/tlsf/tlsf.c:1123
+[0m
+[0;33m0x4008d1b0: multi_heap_free_impl at C:/Espressif/frameworks/esp-idf-v5.0.3/components/heap/multi_heap.c:231
+[0m
+[0;33m0x400822b2: heap_caps_free at C:/Espressif/frameworks/esp-idf-v5.0.3/components/heap/heap_caps.c:374
+[0m
+[0;33m0x4008f6c1: free at C:/Espressif/frameworks/esp-idf-v5.0.3/components/newlib/heap.c:39
+[0m
+[0;33m0x4009199e: esf_buf_recycle at ??:?
+[0m
+[0;33m0x40118a30: ppProcTxDone at ??:?
+[0m
+[0;33m0x40090f3d: ppTask at ??:?
+[0m
+[0;33m0x4008bde9: vPortTaskWrapper at C:/Espressif/frameworks/esp-idf-v5.0.3/components/freertos/FreeRTOS-Kernel/portable/xtensa/port.c:154
+[0m
+[0;33m0x40080400: _init at ??:?
+[0m
+[0;33m0x400812bc: call_start_cpu1 at C:/Espressif/frameworks/esp-idf-v5.0.3/components/esp_system/port/cpu_start.c:143
+[0m
+[0m
