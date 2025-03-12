@@ -11,6 +11,7 @@
 #include "esp_wifi.h"
 #include "esp_event.h"
 #include "esp_log.h"
+#include "esp_sntp.h"
 #include "nvs_flash.h"
 #include "lwip/err.h"
 #include "lwip/sys.h"
@@ -121,6 +122,10 @@ void float_array_to_bytes(float *float_array, uint8_t *byte_array, size_t float_
     memcpy(byte_array, float_array, float_count * sizeof(float));
 }
 
+void uint32_array_to_bytes(uint32_t *data_uint32, uint8_t *byte_array, size_t uint32_count) {
+    memcpy(byte_array, data_uint32, uint32_count * sizeof(uint32_t));
+}
+
 /* WiFi event handler */
 static void event_handler(void* arg, esp_event_base_t event_base,
                                 int32_t event_id, void* event_data)
@@ -201,6 +206,80 @@ void wifi_init_sta(void)
     }
 }
 
+void set_timezone_est(void)
+{
+    // Set the timezone to EST (UTC-5) and EDT (UTC-4)
+    setenv("TZ", "EST5EDT,M3.2.0/2,M11.1.0", 1);
+    tzset();
+}
+
+void initialize_sntp(void)
+{
+    ESP_LOGI("SNTP", "Initializing SNTP");
+    sntp_setoperatingmode(SNTP_OPMODE_POLL);
+    sntp_setservername(0, "pool.ntp.org");
+    sntp_init();
+
+    // Wait for time to be set
+    time_t now = 0;
+    struct tm timeinfo = { 0 };
+    int retry = 0;
+    const int retry_count = 10;
+    while (timeinfo.tm_year < (2016 - 1900) && ++retry < retry_count) {
+        ESP_LOGI("SNTP", "Waiting for system time to be set... (%d/%d)", retry, retry_count);
+        vTaskDelay(2000 / portTICK_PERIOD_MS);
+        time(&now);
+        localtime_r(&now, &timeinfo);
+    }
+}
+
+void format_timestamp(char *buffer, size_t buffer_size, uint32_t *time_output)
+{
+    struct timeval tv;
+    struct tm timeinfo;
+
+    gettimeofday(&tv, NULL);
+
+    localtime_r(&tv.tv_sec, &timeinfo);
+
+    strftime(buffer, buffer_size, "%Y%m%d%H%M%S", &timeinfo);
+
+    char microseconds[7];
+    snprintf(microseconds, sizeof(microseconds), "%06ld", tv.tv_usec);
+    strncat(buffer, microseconds, buffer_size - strlen(buffer) - 1);
+
+    char number[32];
+    char *endptr;
+    strncpy(number, buffer, 4);
+    number[4] = '\0';
+    unsigned long year = strtoul(number, &endptr, 10);
+    time_output[0] = (uint32_t)year;
+    strncpy(number, buffer + 4, 2);
+    number[2] = '\0';
+    unsigned long month = strtoul(number, &endptr, 10);
+    time_output[1] = (uint32_t)month;
+    strncpy(number, buffer + 6, 2);
+    number[2] = '\0';
+    unsigned long day = strtoul(number, &endptr, 10);
+    time_output[2] = (uint32_t)day;
+    strncpy(number, buffer + 8, 2);
+    number[2] = '\0';
+    unsigned long hour = strtoul(number, &endptr, 10);
+    time_output[3] = (uint32_t)hour;
+    strncpy(number, buffer + 10, 2);
+    number[2] = '\0';
+    unsigned long minute = strtoul(number, &endptr, 10);
+    time_output[4] = (uint32_t)minute;
+    strncpy(number, buffer + 12, 2);
+    number[2] = '\0';
+    unsigned long second = strtoul(number, &endptr, 10);
+    time_output[5] = (uint32_t)second;
+    strncpy(number, buffer + 14, 6);
+    number[6] = '\0';
+    unsigned long microsecond = strtoul(number, &endptr, 10);
+    time_output[6] = (uint32_t)microsecond;
+}
+
 /* TCP client task */
 void tcp_client_task(void *pvParameters)
 {
@@ -238,10 +317,20 @@ void tcp_client_task(void *pvParameters)
         float v_out[NUM_ADC_CHANNELS];
         float r_var[NUM_ADC_CHANNELS];
         float force[NUM_ADC_CHANNELS];
+        
+        char timestamp[32];
+        uint32_t time_output[7];
+
+        uint8_t time_bytes[7 * sizeof(uint32_t)];
         uint8_t data_bytes[BUF_SIZE * NUM_ADC_CHANNELS * sizeof(float)];
+        uint8_t merged_array[7 * sizeof(uint32_t) + BUF_SIZE * NUM_ADC_CHANNELS * sizeof(float)];
 
         while (1) {
-            /* Send data to server */
+            // Timestamp
+            format_timestamp(timestamp, sizeof(timestamp), time_output);
+            uint32_array_to_bytes(time_output, time_bytes, 7);
+
+            // Read sensor data
             for(int i = 0; i < BUF_SIZE; i++) {
                 // Read sensor data
                 read_adc(adc_values);
@@ -255,8 +344,16 @@ void tcp_client_task(void *pvParameters)
                 vTaskDelay(SAMPLE_INTERVAL_MS / portTICK_PERIOD_MS);
             }
 
-            // 发送数据
-            int sent = send(sock, data_bytes, BUF_SIZE * NUM_ADC_CHANNELS * sizeof(float), 0);
+            // Merge
+            memcpy(merged_array, time_bytes, 7 * sizeof(uint32_t));
+            memcpy(merged_array + 7 * sizeof(uint32_t), data_bytes, BUF_SIZE * NUM_ADC_CHANNELS * sizeof(float));
+            printf("Data: ");
+            for (int i = 0; i < 7 * sizeof(uint32_t) + BUF_SIZE * NUM_ADC_CHANNELS * sizeof(float); i++) {
+                printf("%02x ", merged_array[i]);
+            }
+
+            // Send
+            int sent = send(sock, merged_array, 7 * sizeof(uint32_t) + BUF_SIZE * NUM_ADC_CHANNELS * sizeof(float), 0);
             if (sent < 0) {
                 ESP_LOGE(TAG, "Failed to send data");
             } else {
@@ -285,6 +382,9 @@ void app_main(void)
     ESP_LOGI(TAG, "ESP_WIFI_MODE_STA");
     wifi_init_sta();
 
+    set_timezone_est();
+    initialize_sntp();
+
     // Start TCP client task
-    xTaskCreate(tcp_client_task, "tcp_client", 4096, NULL, 5, NULL);
+    xTaskCreate(tcp_client_task, "tcp_client", 8192, NULL, 5, NULL);
 }
