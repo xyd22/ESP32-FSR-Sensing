@@ -7,6 +7,7 @@
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
 #include "freertos/event_groups.h"
+#include "freertos/queue.h"
 #include "esp_system.h"
 #include "esp_wifi.h"
 #include "esp_event.h"
@@ -36,6 +37,7 @@
 
 #define SAMPLE_INTERVAL_MS 10 // sampling interval
 #define BUF_SIZE 64
+#define LEN_TIMESTAMP 2
 
 /* WiFi configuration */
 #define EXAMPLE_ESP_WIFI_SSID      CONFIG_ESP_WIFI_SSID
@@ -61,17 +63,27 @@
 #endif
 
 /* Server configuration */
-#define SERVER_IP   "192.168.0.114"  // 替换为你的 PC 的 IP 地址
-#define SERVER_PORT 1234             // 替换为你的服务器端口
-
-/* Event group and retry counter */
-static EventGroupHandle_t s_wifi_event_group;
-static const char *TAG = "wifi station";
-static int s_retry_num = 0;
+#define SERVER_IP   "192.168.0.114" 
+#define SERVER_PORT 1234     
 
 /* FreeRTOS event bits */
 #define WIFI_CONNECTED_BIT BIT0
 #define WIFI_FAIL_BIT      BIT1
+
+/* Event group and retry counter */
+static EventGroupHandle_t s_wifi_event_group;
+static const char *TAG = "ESP32";
+static int s_retry_num = 0;
+
+/* Data structure */
+typedef struct {
+    uint8_t time_bytes[LEN_TIMESTAMP * sizeof(uint32_t)];
+    uint8_t data_bytes[BUF_SIZE * NUM_ADC_CHANNELS * sizeof(float)];
+} sensor_data_t;
+
+/* Queue handle */
+QueueHandle_t data_queue;
+
 
 /*Hardware related functions*/
 void init_adc() {
@@ -242,42 +254,11 @@ void format_timestamp(char *buffer, size_t buffer_size, uint32_t *time_output)
 
     localtime_r(&tv.tv_sec, &timeinfo);
 
-    strftime(buffer, buffer_size, "%Y%m%d%H%M%S", &timeinfo);
+    time_t unix_ts_s = tv.tv_sec;
+    time_t unix_ts_us = tv.tv_usec;
 
-    char microseconds[7];
-    snprintf(microseconds, sizeof(microseconds), "%06ld", tv.tv_usec);
-    strncat(buffer, microseconds, buffer_size - strlen(buffer) - 1);
-
-    char number[32];
-    char *endptr;
-    strncpy(number, buffer, 4);
-    number[4] = '\0';
-    unsigned long year = strtoul(number, &endptr, 10);
-    time_output[0] = (uint32_t)year;
-    strncpy(number, buffer + 4, 2);
-    number[2] = '\0';
-    unsigned long month = strtoul(number, &endptr, 10);
-    time_output[1] = (uint32_t)month;
-    strncpy(number, buffer + 6, 2);
-    number[2] = '\0';
-    unsigned long day = strtoul(number, &endptr, 10);
-    time_output[2] = (uint32_t)day;
-    strncpy(number, buffer + 8, 2);
-    number[2] = '\0';
-    unsigned long hour = strtoul(number, &endptr, 10);
-    time_output[3] = (uint32_t)hour;
-    strncpy(number, buffer + 10, 2);
-    number[2] = '\0';
-    unsigned long minute = strtoul(number, &endptr, 10);
-    time_output[4] = (uint32_t)minute;
-    strncpy(number, buffer + 12, 2);
-    number[2] = '\0';
-    unsigned long second = strtoul(number, &endptr, 10);
-    time_output[5] = (uint32_t)second;
-    strncpy(number, buffer + 14, 6);
-    number[6] = '\0';
-    unsigned long microsecond = strtoul(number, &endptr, 10);
-    time_output[6] = (uint32_t)microsecond;
+    time_output[0] = (uint32_t)unix_ts_s;
+    time_output[1] = (uint32_t)unix_ts_us;
 }
 
 /* TCP client task */
@@ -319,16 +300,16 @@ void tcp_client_task(void *pvParameters)
         float force[NUM_ADC_CHANNELS];
         
         char timestamp[32];
-        uint32_t time_output[7];
+        uint32_t time_output[2];
 
-        uint8_t time_bytes[7 * sizeof(uint32_t)];
+        uint8_t time_bytes[LEN_TIMESTAMP * sizeof(uint32_t)];
         uint8_t data_bytes[BUF_SIZE * NUM_ADC_CHANNELS * sizeof(float)];
-        uint8_t merged_array[7 * sizeof(uint32_t) + BUF_SIZE * NUM_ADC_CHANNELS * sizeof(float)];
+        uint8_t merged_array[LEN_TIMESTAMP * sizeof(uint32_t) + BUF_SIZE * NUM_ADC_CHANNELS * sizeof(float)];
 
         while (1) {
             // Timestamp
             format_timestamp(timestamp, sizeof(timestamp), time_output);
-            uint32_array_to_bytes(time_output, time_bytes, 7);
+            uint32_array_to_bytes(time_output, time_bytes, LEN_TIMESTAMP);
 
             // Read sensor data
             for(int i = 0; i < BUF_SIZE; i++) {
@@ -345,15 +326,15 @@ void tcp_client_task(void *pvParameters)
             }
 
             // Merge
-            memcpy(merged_array, time_bytes, 7 * sizeof(uint32_t));
-            memcpy(merged_array + 7 * sizeof(uint32_t), data_bytes, BUF_SIZE * NUM_ADC_CHANNELS * sizeof(float));
+            memcpy(merged_array, time_bytes, LEN_TIMESTAMP * sizeof(uint32_t));
+            memcpy(merged_array + LEN_TIMESTAMP * sizeof(uint32_t), data_bytes, BUF_SIZE * NUM_ADC_CHANNELS * sizeof(float));
             printf("Data: ");
-            for (int i = 0; i < 7 * sizeof(uint32_t) + BUF_SIZE * NUM_ADC_CHANNELS * sizeof(float); i++) {
+            for (int i = 0; i < LEN_TIMESTAMP * sizeof(uint32_t) + BUF_SIZE * NUM_ADC_CHANNELS * sizeof(float); i++) {
                 printf("%02x ", merged_array[i]);
             }
 
             // Send
-            int sent = send(sock, merged_array, 7 * sizeof(uint32_t) + BUF_SIZE * NUM_ADC_CHANNELS * sizeof(float), 0);
+            int sent = send(sock, merged_array, LEN_TIMESTAMP * sizeof(uint32_t) + BUF_SIZE * NUM_ADC_CHANNELS * sizeof(float), 0);
             if (sent < 0) {
                 ESP_LOGE(TAG, "Failed to send data");
             } else {
@@ -362,6 +343,102 @@ void tcp_client_task(void *pvParameters)
         }
 
         /* Close socket and retry */
+        close(sock);
+        ESP_LOGI(TAG, "Shutting down socket and retrying...");
+        vTaskDelay(1000 / portTICK_PERIOD_MS);
+    }
+}
+
+void data_acquisition_task(void *pvParameters)
+{
+    uint32_t adc_values[NUM_ADC_CHANNELS];
+    float v_out[NUM_ADC_CHANNELS];
+    float r_var[NUM_ADC_CHANNELS];
+    float force[NUM_ADC_CHANNELS];
+    char timestamp[32];
+    uint32_t time_output[LEN_TIMESTAMP];
+
+    while (1) {
+        // Malloc
+        sensor_data_t *data_collect = malloc(sizeof(sensor_data_t));
+        if (data_collect == NULL) {
+            ESP_LOGE(TAG, "Failed to allocate memory for sensor data");
+            vTaskDelay(1000 / portTICK_PERIOD_MS);
+            continue;
+        }
+
+        // Timestamp
+        format_timestamp(timestamp, sizeof(timestamp), time_output);
+        uint32_array_to_bytes(time_output, data_collect->time_bytes, LEN_TIMESTAMP);
+
+        // Read
+        for (int i = 0; i < BUF_SIZE; i++) {
+            read_adc(adc_values);
+            calculate_varistor_resistance(r_var, v_out, adc_values);
+            resistance_to_force(r_var, force);
+
+            float_array_to_bytes(v_out, data_collect->data_bytes + i * NUM_ADC_CHANNELS * sizeof(float), NUM_ADC_CHANNELS);
+
+            vTaskDelay(SAMPLE_INTERVAL_MS / portTICK_PERIOD_MS);
+        }
+
+        // Send to queue
+        if (xQueueSend(data_queue, &data_collect, portMAX_DELAY) != pdTRUE) {
+            ESP_LOGE(TAG, "Failed to send data to queue");
+            free(data_collect);
+        }
+    }
+}
+
+void data_sending_task(void *pvParameters)
+{
+    int sock;
+    struct sockaddr_in server_addr;
+    server_addr.sin_addr.s_addr = inet_addr(SERVER_IP);
+    server_addr.sin_family = AF_INET;
+    server_addr.sin_port = htons(SERVER_PORT);
+
+    while (1) {
+        // Create socket
+        sock = socket(AF_INET, SOCK_STREAM, IPPROTO_IP);
+        if (sock < 0) {
+            ESP_LOGE(TAG, "Unable to create socket: errno %d", errno);
+            vTaskDelay(1000 / portTICK_PERIOD_MS);
+            continue;
+        }
+
+        // Connect to server
+        if (connect(sock, (struct sockaddr *)&server_addr, sizeof(server_addr))) {
+            ESP_LOGE(TAG, "Socket unable to connect: errno %d", errno);
+            close(sock);
+            vTaskDelay(1000 / portTICK_PERIOD_MS);
+            continue;
+        }
+
+        ESP_LOGI(TAG, "Successfully connected");
+
+        while (1) {
+            // Receive from queue
+            sensor_data_t *data_send;
+            if (xQueueReceive(data_queue, &data_send, portMAX_DELAY) == pdTRUE) {
+                // Merge
+                uint8_t merged_array[LEN_TIMESTAMP * sizeof(uint32_t) + BUF_SIZE * NUM_ADC_CHANNELS * sizeof(float)];
+                memcpy(merged_array, data_send->time_bytes, LEN_TIMESTAMP * sizeof(uint32_t));
+                memcpy(merged_array + LEN_TIMESTAMP * sizeof(uint32_t), data_send->data_bytes, BUF_SIZE * NUM_ADC_CHANNELS * sizeof(float));
+
+                // Send
+                int sent = send(sock, merged_array, sizeof(merged_array), 0);
+                if (sent < 0) {
+                    ESP_LOGE(TAG, "Failed to send data");
+                    break;
+                } else {
+                    ESP_LOGI(TAG, "Data sent");
+                }
+
+                free(data_send);
+            }
+        }
+
         close(sock);
         ESP_LOGI(TAG, "Shutting down socket and retrying...");
         vTaskDelay(1000 / portTICK_PERIOD_MS);
@@ -386,5 +463,14 @@ void app_main(void)
     initialize_sntp();
 
     // Start TCP client task
-    xTaskCreate(tcp_client_task, "tcp_client", 8192, NULL, 5, NULL);
+    // xTaskCreate(tcp_client_task, "tcp_client", 8192, NULL, 5, NULL);
+
+    // Multithreads
+    data_queue = xQueueCreate(10, sizeof(sensor_data_t *)); 
+    if (data_queue == NULL) {
+        ESP_LOGE(TAG, "Failed to create queue");
+        return;
+    }
+    xTaskCreate(data_acquisition_task, "data_acquisition", 8192, NULL, 5, NULL);
+    xTaskCreate(data_sending_task, "data_sending", 8192, NULL, 5, NULL);
 }

@@ -3,6 +3,7 @@ import struct
 
 NUM_ADC_CHANNELS = 5
 BUF_SIZE = 64
+LEN_TIMESTAMP = 2
 sizeof_float = 4
 sizeof_uint32 = 4
 
@@ -23,7 +24,7 @@ print(f"Connected to {client_address}")
 with open("sensor_data.raw", "wb") as file:
     while True:
         try:
-            data = client_socket.recv(7 * sizeof_uint32 + BUF_SIZE * NUM_ADC_CHANNELS * sizeof_float)
+            data = client_socket.recv(LEN_TIMESTAMP * sizeof_uint32 + BUF_SIZE * NUM_ADC_CHANNELS * sizeof_float)
             if not data:
                 print("Client disconnected.")
                 break
