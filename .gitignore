@@ -1,5 +1,6 @@
 pilot_study
 *.raw
+*.csv
 ESP_FSR_pilot_1
 WIFI/test.py
 station/build

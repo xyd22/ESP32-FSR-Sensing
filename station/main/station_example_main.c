@@ -40,9 +40,18 @@
 #define LEN_TIMESTAMP 2
 
 /* WiFi configuration */
-#define EXAMPLE_ESP_WIFI_SSID      CONFIG_ESP_WIFI_SSID
-#define EXAMPLE_ESP_WIFI_PASS      CONFIG_ESP_WIFI_PASSWORD
+// Wi-Fi MAC Address: 3C:71:BF:14:E6:C4
+// !!! Remember to change the wifi config from public to private
+// #define EXAMPLE_ESP_WIFI_SSID      CONFIG_ESP_WIFI_SSID
+// #define EXAMPLE_ESP_WIFI_PASS      CONFIG_ESP_WIFI_PASSWORD
+#define EXAMPLE_ESP_WIFI_SSID      "RedRover"
+#define EXAMPLE_ESP_WIFI_PASS      ""
 #define EXAMPLE_ESP_MAXIMUM_RETRY  CONFIG_ESP_MAXIMUM_RETRY
+
+/* Server configuration */
+// #define SERVER_IP   "192.168.0.114" // TP-Link_AA24
+#define SERVER_IP "10.49.22.33" // RedRover (changes every time)
+#define SERVER_PORT 1234     
 
 #if CONFIG_ESP_WIFI_AUTH_OPEN
 #define ESP_WIFI_SCAN_AUTH_MODE_THRESHOLD WIFI_AUTH_OPEN
@@ -62,10 +71,6 @@
 #define ESP_WIFI_SCAN_AUTH_MODE_THRESHOLD WIFI_AUTH_WAPI_PSK
 #endif
 
-/* Server configuration */
-#define SERVER_IP   "192.168.0.114" 
-#define SERVER_PORT 1234     
-
 /* FreeRTOS event bits */
 #define WIFI_CONNECTED_BIT BIT0
 #define WIFI_FAIL_BIT      BIT1
@@ -75,8 +80,11 @@ static EventGroupHandle_t s_wifi_event_group;
 static const char *TAG = "ESP32";
 static int s_retry_num = 0;
 
+uint32_t Package_count = 0;
+
 /* Data structure */
 typedef struct {
+    uint8_t package_count[sizeof(uint32_t)];
     uint8_t time_bytes[LEN_TIMESTAMP * sizeof(uint32_t)];
     uint8_t data_bytes[BUF_SIZE * NUM_ADC_CHANNELS * sizeof(float)];
 } sensor_data_t;
@@ -103,15 +111,17 @@ void read_adc(uint32_t adc_values[NUM_ADC_CHANNELS]) {
     adc_values[4] = adc1_get_raw(ADC_CHANNEL_9);  // 读取通道 9
 }
 
-void calculate_varistor_resistance(float r_var[NUM_ADC_CHANNELS], float voltage[NUM_ADC_CHANNELS],uint32_t adc_value[NUM_ADC_CHANNELS]) {
+void calculate_varistor_resistance(float r_var[NUM_ADC_CHANNELS], float voltage[NUM_ADC_CHANNELS], uint32_t adc_value[NUM_ADC_CHANNELS]) {
     float current;
     for (int i = 0; i < NUM_ADC_CHANNELS; i++) {
         voltage[i] = (float)adc_value[i] / 4095 * 3.3;
-        if (adc_value[i] == 4095) {
+        if (adc_value[i] == 0) {
             r_var[i] = INFINITY;
         }
-        current =  voltage[i] / R_DVD;
-        r_var[i] = (3.3 - voltage[i]) / current;
+        else{
+            current =  voltage[i] / R_DVD;
+            r_var[i] = (3.3 - voltage[i]) / current;
+        }
     }
 }
 
@@ -190,7 +200,8 @@ void wifi_init_sta(void)
         .sta = {
             .ssid = EXAMPLE_ESP_WIFI_SSID,
             .password = EXAMPLE_ESP_WIFI_PASS,
-            .threshold.authmode = ESP_WIFI_SCAN_AUTH_MODE_THRESHOLD,
+            // .threshold.authmode = ESP_WIFI_SCAN_AUTH_MODE_THRESHOLD,
+            .threshold.authmode = WIFI_AUTH_OPEN,
             .sae_pwe_h2e = WPA3_SAE_PWE_BOTH,
         },
     };
@@ -261,94 +272,6 @@ void format_timestamp(char *buffer, size_t buffer_size, uint32_t *time_output)
     time_output[1] = (uint32_t)unix_ts_us;
 }
 
-/* TCP client task */
-void tcp_client_task(void *pvParameters)
-{
-    char rx_buffer[128];
-    char tx_buffer[128];
-    int sock;
-
-    struct sockaddr_in server_addr;
-    server_addr.sin_addr.s_addr = inet_addr(SERVER_IP);
-    server_addr.sin_family = AF_INET;
-    server_addr.sin_port = htons(SERVER_PORT);
-
-    while(1){
-        /* Create socket */
-        sock = socket(AF_INET, SOCK_STREAM, IPPROTO_IP);
-        if (sock < 0) {
-            ESP_LOGE(TAG, "Unable to create socket: errno %d", errno);
-            vTaskDelay(1000 / portTICK_PERIOD_MS);
-            continue;
-        }
-
-        ESP_LOGI(TAG, "Socket created, connecting to %s:%d", SERVER_IP, SERVER_PORT);
-
-        /* Connect to server */
-        if (connect(sock, (struct sockaddr *)&server_addr, sizeof(server_addr))) {
-            ESP_LOGE(TAG, "Socket unable to connect: errno %d", errno);
-            close(sock);
-            vTaskDelay(1000 / portTICK_PERIOD_MS);
-            continue;
-        }
-
-        ESP_LOGI(TAG, "Successfully connected");
-
-        uint32_t adc_values[NUM_ADC_CHANNELS];
-        float v_out[NUM_ADC_CHANNELS];
-        float r_var[NUM_ADC_CHANNELS];
-        float force[NUM_ADC_CHANNELS];
-        
-        char timestamp[32];
-        uint32_t time_output[2];
-
-        uint8_t time_bytes[LEN_TIMESTAMP * sizeof(uint32_t)];
-        uint8_t data_bytes[BUF_SIZE * NUM_ADC_CHANNELS * sizeof(float)];
-        uint8_t merged_array[LEN_TIMESTAMP * sizeof(uint32_t) + BUF_SIZE * NUM_ADC_CHANNELS * sizeof(float)];
-
-        while (1) {
-            // Timestamp
-            format_timestamp(timestamp, sizeof(timestamp), time_output);
-            uint32_array_to_bytes(time_output, time_bytes, LEN_TIMESTAMP);
-
-            // Read sensor data
-            for(int i = 0; i < BUF_SIZE; i++) {
-                // Read sensor data
-                read_adc(adc_values);
-                calculate_varistor_resistance(r_var, v_out, adc_values);
-                resistance_to_force(r_var, force);
-
-                // Convert
-                float_array_to_bytes(v_out, data_bytes + i * NUM_ADC_CHANNELS * sizeof(float), NUM_ADC_CHANNELS);
-
-                // Frequency control
-                vTaskDelay(SAMPLE_INTERVAL_MS / portTICK_PERIOD_MS);
-            }
-
-            // Merge
-            memcpy(merged_array, time_bytes, LEN_TIMESTAMP * sizeof(uint32_t));
-            memcpy(merged_array + LEN_TIMESTAMP * sizeof(uint32_t), data_bytes, BUF_SIZE * NUM_ADC_CHANNELS * sizeof(float));
-            printf("Data: ");
-            for (int i = 0; i < LEN_TIMESTAMP * sizeof(uint32_t) + BUF_SIZE * NUM_ADC_CHANNELS * sizeof(float); i++) {
-                printf("%02x ", merged_array[i]);
-            }
-
-            // Send
-            int sent = send(sock, merged_array, LEN_TIMESTAMP * sizeof(uint32_t) + BUF_SIZE * NUM_ADC_CHANNELS * sizeof(float), 0);
-            if (sent < 0) {
-                ESP_LOGE(TAG, "Failed to send data");
-            } else {
-                ESP_LOGI(TAG, "Data sent");
-            }
-        }
-
-        /* Close socket and retry */
-        close(sock);
-        ESP_LOGI(TAG, "Shutting down socket and retrying...");
-        vTaskDelay(1000 / portTICK_PERIOD_MS);
-    }
-}
-
 void data_acquisition_task(void *pvParameters)
 {
     uint32_t adc_values[NUM_ADC_CHANNELS];
@@ -367,6 +290,12 @@ void data_acquisition_task(void *pvParameters)
             continue;
         }
 
+        // Package Count
+        Package_count++;
+        if(Package_count % 100 == 0) Package_count = 0;
+        uint32_array_to_bytes(&Package_count, data_collect->package_count, 1);
+        // printf("%u", data_collect->package_count[0]);
+
         // Timestamp
         format_timestamp(timestamp, sizeof(timestamp), time_output);
         uint32_array_to_bytes(time_output, data_collect->time_bytes, LEN_TIMESTAMP);
@@ -378,6 +307,11 @@ void data_acquisition_task(void *pvParameters)
             resistance_to_force(r_var, force);
 
             float_array_to_bytes(v_out, data_collect->data_bytes + i * NUM_ADC_CHANNELS * sizeof(float), NUM_ADC_CHANNELS);
+            // printf("Data: ");
+            // for (int j = 0; j < NUM_ADC_CHANNELS; j++) {
+            //     printf("%lu ", adc_values[j]);
+            // }
+            // printf("\n");
 
             vTaskDelay(SAMPLE_INTERVAL_MS / portTICK_PERIOD_MS);
         }
@@ -397,6 +331,7 @@ void data_sending_task(void *pvParameters)
     server_addr.sin_addr.s_addr = inet_addr(SERVER_IP);
     server_addr.sin_family = AF_INET;
     server_addr.sin_port = htons(SERVER_PORT);
+    int send_buf_size = 2048;
 
     while (1) {
         // Create socket
@@ -406,6 +341,7 @@ void data_sending_task(void *pvParameters)
             vTaskDelay(1000 / portTICK_PERIOD_MS);
             continue;
         }
+        setsockopt(sock, SOL_SOCKET, SO_SNDBUF, &send_buf_size, sizeof(send_buf_size));
 
         // Connect to server
         if (connect(sock, (struct sockaddr *)&server_addr, sizeof(server_addr))) {
@@ -417,25 +353,55 @@ void data_sending_task(void *pvParameters)
 
         ESP_LOGI(TAG, "Successfully connected");
 
+        // Clear queue and free memory
+        while (uxQueueMessagesWaiting(data_queue) > 0) {
+            sensor_data_t *data;
+            if (xQueueReceive(data_queue, &data, 0) == pdTRUE) {
+                free(data);
+                // ??
+            }
+        }
+
+        ESP_LOGI(TAG, "Queue cleared");
+
+        Package_count = 0;
+
         while (1) {
             // Receive from queue
+            // sensor_data_t *data_send = malloc(sizeof(sensor_data_t));
             sensor_data_t *data_send;
             if (xQueueReceive(data_queue, &data_send, portMAX_DELAY) == pdTRUE) {
+
                 // Merge
-                uint8_t merged_array[LEN_TIMESTAMP * sizeof(uint32_t) + BUF_SIZE * NUM_ADC_CHANNELS * sizeof(float)];
-                memcpy(merged_array, data_send->time_bytes, LEN_TIMESTAMP * sizeof(uint32_t));
-                memcpy(merged_array + LEN_TIMESTAMP * sizeof(uint32_t), data_send->data_bytes, BUF_SIZE * NUM_ADC_CHANNELS * sizeof(float));
+                uint8_t merged_array[sizeof(uint32_t) + LEN_TIMESTAMP * sizeof(uint32_t) + BUF_SIZE * NUM_ADC_CHANNELS * sizeof(float)];
+                memcpy(merged_array, data_send->package_count, sizeof(uint32_t));
+                memcpy(merged_array + sizeof(uint32_t), data_send->time_bytes, LEN_TIMESTAMP * sizeof(uint32_t));
+                memcpy(merged_array + sizeof(uint32_t) + LEN_TIMESTAMP * sizeof(uint32_t), data_send->data_bytes, BUF_SIZE * NUM_ADC_CHANNELS * sizeof(float));
+                ESP_LOGI(TAG, "Data Length: %u", sizeof(merged_array));
 
                 // Send
                 int sent = send(sock, merged_array, sizeof(merged_array), 0);
                 if (sent < 0) {
-                    ESP_LOGE(TAG, "Failed to send data");
+                    ESP_LOGE(TAG, "Failed to send data, errno: %d", errno);
+                    printf("Data: ");
+                    for (int i = 0; i < sizeof(merged_array); i++) {
+                        printf("%02x ", merged_array[i]);
+                    }                    
                     break;
                 } else {
-                    ESP_LOGI(TAG, "Data sent");
+                    ESP_LOGI(TAG, "# %lu, Data sent %u", Package_count, sizeof(merged_array));
+                    // printf("Data: ");
+                    // for (int i = 0; i < sizeof(merged_array); i++) {
+                    //     printf("%02x ", merged_array[i]);
+                    // }
+                }
+                ESP_LOGI(TAG, "Queue messages: %u", uxQueueMessagesWaiting(data_queue));
+                if (uxQueueSpacesAvailable(data_queue) == 0) {
+                    ESP_LOGE(TAG, "Queue is full, dropping data");
                 }
 
                 free(data_send);
+                ESP_LOGI(TAG, "Free heap: %lu", esp_get_free_heap_size());
             }
         }
 
@@ -448,6 +414,9 @@ void data_sending_task(void *pvParameters)
 /* Main application */
 void app_main(void)
 {
+    // Initialize ADC
+    init_adc();
+
     // Initialize NVS
     esp_err_t ret = nvs_flash_init();
     if (ret == ESP_ERR_NVS_NO_FREE_PAGES || ret == ESP_ERR_NVS_NEW_VERSION_FOUND) {
@@ -471,6 +440,9 @@ void app_main(void)
         ESP_LOGE(TAG, "Failed to create queue");
         return;
     }
-    xTaskCreate(data_acquisition_task, "data_acquisition", 8192, NULL, 5, NULL);
-    xTaskCreate(data_sending_task, "data_sending", 8192, NULL, 5, NULL);
+    // xTaskCreate(data_acquisition_task, "data_acquisition", 8192, NULL, 5, NULL);
+    // xTaskCreate(data_sending_task, "data_sending", 8192, NULL, 5, NULL);
+
+    xTaskCreatePinnedToCore(data_acquisition_task, "data_acquisition", 8192, NULL, 5, NULL, 0);
+    xTaskCreatePinnedToCore(data_sending_task, "data_sending", 8192, NULL, 6, NULL, 1);
 }
