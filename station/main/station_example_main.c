@@ -50,7 +50,7 @@
 
 /* Server configuration */
 // #define SERVER_IP   "192.168.0.114" // TP-Link_AA24
-#define SERVER_IP "10.49.22.33" // RedRover (changes every time)
+#define SERVER_IP "10.49.28.95" // RedRover (changes every time)
 #define SERVER_PORT 1234     
 
 #if CONFIG_ESP_WIFI_AUTH_OPEN

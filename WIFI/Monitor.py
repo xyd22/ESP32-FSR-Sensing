@@ -14,7 +14,7 @@ counter = 0
 
 # Server Config
 # SERVER_IP = "192.168.0.114" # TP-Link_AA24
-SERVER_IP = "10.49.22.33" # RedRover
+SERVER_IP = "10.49.28.95" # RedRover
 SERVER_PORT = 1234 
 
 # TCP Server
@@ -47,8 +47,11 @@ with open(filename, mode='w', encoding='utf-8', newline='') as file:
             print(f"Received {len(data)} bytes")
             if len(data) != sizeof_uint32 + LEN_TIMESTAMP * sizeof_uint32 + BUF_SIZE * NUM_ADC_CHANNELS * sizeof_float:
                 print("Data length mismatch: ", len(data))
-                print(data)
-                continue
+                # receive again
+                data_after = client_socket.recv(sizeof_uint32 + LEN_TIMESTAMP * sizeof_uint32 + BUF_SIZE * NUM_ADC_CHANNELS * sizeof_float)
+                data = data + data_after
+            
+            assert len(data) == sizeof_uint32 + LEN_TIMESTAMP * sizeof_uint32 + BUF_SIZE * NUM_ADC_CHANNELS * sizeof_float, "Data length mismatch"
 
             Package_count = int.from_bytes(data[:sizeof_uint32], byteorder='little')
 
@@ -56,8 +59,8 @@ with open(filename, mode='w', encoding='utf-8', newline='') as file:
             timestamp_us = int.from_bytes(data[LEN_TIMESTAMP * sizeof_uint32:(LEN_TIMESTAMP+1) * sizeof_uint32], byteorder='little')
             time_stamp = timestamp_s + timestamp_us / 1000000
 
-            output_array = [struct.unpack('<f', data[i * sizeof_float:(i + 1) * sizeof_float])[0] for i in range(1 + LEN_TIMESTAMP, 1 + LEN_TIMESTAMP + NUM_ADC_CHANNELS * BUF_SIZE)]
-            assert len(output_array) == NUM_ADC_CHANNELS * BUF_SIZE, "ADC length mismatch"
+            output_array = [struct.unpack('<f', data[i * sizeof_float:(i + 1) * sizeof_float])[0] for i in range(1 + LEN_TIMESTAMP, 1 + LEN_TIMESTAMP + BUF_SIZE * NUM_ADC_CHANNELS)]
+            assert len(output_array) == BUF_SIZE * NUM_ADC_CHANNELS, "ADC length mismatch"
 
             time_stamp_array = [time_stamp + i * SAMPLE_INTERVAL_MS / 1000 for i in range(len(output_array) // NUM_ADC_CHANNELS)]
 
