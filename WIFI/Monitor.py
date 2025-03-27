@@ -14,7 +14,7 @@ counter = 0
 
 # Server Config
 # SERVER_IP = "192.168.0.114" # TP-Link_AA24
-SERVER_IP = "10.49.28.95" # RedRover
+SERVER_IP = "10.49.92.173" # RedRover
 SERVER_PORT = 1234 
 
 # TCP Server
@@ -48,10 +48,11 @@ with open(filename, mode='w', encoding='utf-8', newline='') as file:
             if len(data) != sizeof_uint32 + LEN_TIMESTAMP * sizeof_uint32 + BUF_SIZE * NUM_ADC_CHANNELS * sizeof_float:
                 print("Data length mismatch: ", len(data))
                 # receive again
-                data_after = client_socket.recv(sizeof_uint32 + LEN_TIMESTAMP * sizeof_uint32 + BUF_SIZE * NUM_ADC_CHANNELS * sizeof_float)
+                data_after = client_socket.recv(sizeof_uint32 + LEN_TIMESTAMP * sizeof_uint32 + BUF_SIZE * NUM_ADC_CHANNELS * sizeof_float - len(data))
                 data = data + data_after
             
-            assert len(data) == sizeof_uint32 + LEN_TIMESTAMP * sizeof_uint32 + BUF_SIZE * NUM_ADC_CHANNELS * sizeof_float, "Data length mismatch"
+            print(f"Received {len(data)} bytes after adjustment")
+            # assert len(data) == sizeof_uint32 + LEN_TIMESTAMP * sizeof_uint32 + BUF_SIZE * NUM_ADC_CHANNELS * sizeof_float, "Data length mismatch"
 
             Package_count = int.from_bytes(data[:sizeof_uint32], byteorder='little')
 

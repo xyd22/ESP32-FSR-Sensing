@@ -50,7 +50,7 @@
 
 /* Server configuration */
 // #define SERVER_IP   "192.168.0.114" // TP-Link_AA24
-#define SERVER_IP "10.49.28.95" // RedRover (changes every time)
+#define SERVER_IP "10.49.93.226" // RedRover (changes every time)
 #define SERVER_PORT 1234     
 
 #if CONFIG_ESP_WIFI_AUTH_OPEN
@@ -331,7 +331,7 @@ void data_sending_task(void *pvParameters)
     server_addr.sin_addr.s_addr = inet_addr(SERVER_IP);
     server_addr.sin_family = AF_INET;
     server_addr.sin_port = htons(SERVER_PORT);
-    int send_buf_size = 2048;
+    int send_buf_size = 4096;
 
     while (1) {
         // Create socket
@@ -435,7 +435,7 @@ void app_main(void)
     // xTaskCreate(tcp_client_task, "tcp_client", 8192, NULL, 5, NULL);
 
     // Multithreads
-    data_queue = xQueueCreate(10, sizeof(sensor_data_t *)); 
+    data_queue = xQueueCreate(20, sizeof(sensor_data_t *)); 
     if (data_queue == NULL) {
         ESP_LOGE(TAG, "Failed to create queue");
         return;
